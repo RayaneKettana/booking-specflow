@@ -6,10 +6,7 @@ public class TripletNumber : ICounter<int>
 
     public ICounter<int> next()
     {
-        return new TripletNumber()
-        {
-            Current = Current+1
-        };
+        return Copy(Current + 1);
     }
 
     public bool hasNext()
@@ -19,10 +16,14 @@ public class TripletNumber : ICounter<int>
 
     public ICounter<int> reset()
     {
+        return Copy(0);
+    }
+
+    private static ICounter<int> Copy(int Int)
+    {
         return new TripletNumber
         {
-            Current = 0
+            Current = Int
         };
     }
-    
 }

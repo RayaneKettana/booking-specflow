@@ -11,10 +11,7 @@ public class Letter : ICounter<LetterEnum>
     public ICounter<LetterEnum> next()
     {
         var nextIndex = ((int) Current) + 1;
-        return new Letter
-       {
-        Current   = (LetterEnum)nextIndex
-       };
+        return Copy((LetterEnum) nextIndex);
     }
 
     public bool hasNext()
@@ -24,10 +21,14 @@ public class Letter : ICounter<LetterEnum>
 
     public ICounter<LetterEnum> reset()
     {
-        return new Letter()
-        {
-            Current = LetterEnum.A
-        };
+        return Copy(LetterEnum.A);
     }
 
+    private static Letter Copy(LetterEnum letterEnum)
+    {
+        return new Letter()
+        {
+            Current = letterEnum
+        };
+    }
 }

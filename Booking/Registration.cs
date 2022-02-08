@@ -8,37 +8,14 @@ public class Registration : ICounter<Tuple<ICounter<LetterEnum>, ICounter<int>, 
     {
         if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
         {
-            return new Registration()
-            {
-                Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
-                    Current.Item1.next(),
-                    Current.Item2.reset(),
-                    Current.Item3.reset()
-                    )
-            };
-
+            return Copy(Current.Item1.next(), Current.Item2.reset(), Current.Item3.reset());
         }
         if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
         {
-            return new Registration()
-            {
-                Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
-                    Current.Item1,
-                    Current.Item2.next(),
-                    Current.Item3.reset()
-                )
-            };
-
+            return Copy(Current.Item1, Current.Item2.next(), Current.Item3.reset());
         }
-        return new Registration()
-        {
-            Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
-                Current.Item1,
-                Current.Item2,
-                Current.Item3.next()
-            )
-        };
-        
+
+        return Copy(Current.Item1, Current.Item2, Current.Item3.next());
     }
 
     public bool hasNext()
@@ -48,14 +25,19 @@ public class Registration : ICounter<Tuple<ICounter<LetterEnum>, ICounter<int>, 
 
     public ICounter<Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>> reset()
     {
+        return Copy(Current.Item1.reset(), Current.Item2.reset(), Current.Item3.reset());
+    }
+
+    private static Registration Copy(ICounter<LetterEnum> item1, ICounter<int> item2, ICounter<LetterEnum> item3)
+    {
         return new Registration()
         {
             Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
-                Current.Item1.reset(),
-                Current.Item2.reset(),
-                Current.Item3.reset()
+                item1,
+                item2,
+                item3
             )
         };
     }
-
+    
 }
