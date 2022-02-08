@@ -1,28 +1,45 @@
 namespace Booking;
 
-public class PairLetter : ICounter<PairLetter>
+public class PairLetter : ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>>
 {
-    private string _first;
+    public Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>> Current { get; set; }
 
-    public string First => _first;
-
-    public string Second => _second;
-
-    private string _second;
-
-    public PairLetter(string first, string second)
+    public ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>> next()
     {
-        _first = first ?? throw new ArgumentNullException(nameof(first));
-        _second = second ?? throw new ArgumentNullException(nameof(second));
+        if (!Current.Item2.hasNext())
+        {
+            return new PairLetter()
+            {
+                Current = new Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>(
+                    Current.Item1.next(),
+                    Current.Item2.reset()
+                )
+            };
+        }
+
+        return new PairLetter()
+        {
+            Current = new Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>(
+                Current.Item1,
+                Current.Item2.next()
+            )
+        };
+
     }
 
-    public PairLetter next()
+    public bool hasNext()
     {
-        return this;
+        return Current.Item1.hasNext() || Current.Item2.hasNext();
     }
 
-    public PairLetter getCurrent()
+    public ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>> reset()
     {
-        return this;
+        return new PairLetter()
+        {
+            Current = new Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>(
+                Current.Item1.reset(),
+                Current.Item2.reset()
+            )
+        };
     }
 }

@@ -1,12 +1,61 @@
 namespace Booking;
 
-public class Registration
+public class Registration : ICounter<Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>>
 {
-    private PairLetter _first;
-    private int _second;
-    private PairLetter _third;
+    public Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>> Current { get; set; }
 
-    public PairLetter First => _first;
-    public int Second => _second;
-    public PairLetter Third => _third;
+    public ICounter<Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>> next()
+    {
+        if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
+        {
+            return new Registration()
+            {
+                Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
+                    Current.Item1.next(),
+                    Current.Item2.reset(),
+                    Current.Item3.reset()
+                    )
+            };
+
+        }
+        if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
+        {
+            return new Registration()
+            {
+                Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
+                    Current.Item1,
+                    Current.Item2.next(),
+                    Current.Item3.reset()
+                )
+            };
+
+        }
+        return new Registration()
+        {
+            Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
+                Current.Item1,
+                Current.Item2,
+                Current.Item3.next()
+            )
+        };
+        
+    }
+
+    public bool hasNext()
+    {
+        return Current.Item1.hasNext() || Current.Item2.hasNext() || Current.Item3.hasNext();
+    }
+
+    public ICounter<Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>> reset()
+    {
+        return new Registration()
+        {
+            Current = new Tuple<ICounter<LetterEnum>, ICounter<int>, ICounter<LetterEnum>>(
+                Current.Item1.reset(),
+                Current.Item2.reset(),
+                Current.Item3.reset()
+            )
+        };
+    }
+
 }

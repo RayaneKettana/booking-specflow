@@ -1,16 +1,28 @@
 namespace Booking;
 
-public class TripletNumber : ICounter<TripletNumber>
+public class TripletNumber : ICounter<int>
 {
-    private int _tripletNumber;
-    
-    public TripletNumber next()
+    public int Current { get; set; }
+
+    public ICounter<int> next()
     {
-        throw new NotImplementedException();
+        return new TripletNumber()
+        {
+            Current = Current+1
+        };
     }
 
-    public TripletNumber getCurrent()
+    public bool hasNext()
     {
-        return this;
+        return Current < 1000;
     }
+
+    public ICounter<int> reset()
+    {
+        return new TripletNumber
+        {
+            Current = 0
+        };
+    }
+    
 }

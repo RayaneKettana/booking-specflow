@@ -2,6 +2,12 @@ namespace Booking;
 
 public interface ICounter<T>
 {
-    T next();
-    T getCurrent();
+    public T Current { get; set; }
+
+    ICounter<T> next();
+
+    Boolean hasNext();
+
+    ICounter<T> reset();
+
 }
