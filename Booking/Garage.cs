@@ -14,12 +14,12 @@ public class Garage
     {
         return _garage ??= new Garage(new List<Car>
         {
-         new Car(),
-         new Car()
+         new Car("black","BMW","Serie 3"),
+         new Car("grey", "DACIA", "Duster")
         });
     }
 
-    public Car? get(int index)
+    public Car? Get(int index)
     {
         return carsList.ElementAtOrDefault(index);
     }
