@@ -1,18 +1,21 @@
 namespace Booking.Steps;
 
 [Binding]
-public class Car
+public class CarStepDefinition
 {
+    private Car? _car;
+    private Garage garage;
+
     [Given(@"I get the list of vehicle")]
     public void GivenIGetTheListOfVehicle()
     {
-        ScenarioContext.StepIsPending();
     }
 
     [Given(@"I take the first"), When(@"I take the first")]
     public void GivenITakeTheFirst()
     {
-        ScenarioContext.StepIsPending();
+        garage = Garage.GetInstance();
+        _car = garage.get(1);
     }
 
     [When(@"I get registration id")]
