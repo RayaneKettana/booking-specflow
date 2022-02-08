@@ -1,4 +1,4 @@
-namespace Booking;
+namespace Booking.Registration;
 
 public enum LetterEnum
 {
@@ -6,7 +6,7 @@ public enum LetterEnum
 }
 public class Letter : ICounter<LetterEnum>
 {
-    public LetterEnum Current { get; set; }
+    public LetterEnum Current { get; set; } = LetterEnum.A;
     
     public ICounter<LetterEnum> next()
     {
@@ -30,5 +30,10 @@ public class Letter : ICounter<LetterEnum>
         {
             Current = letterEnum
         };
+    }
+
+    public override string ToString()
+    {
+        return Current.ToString();
     }
 }

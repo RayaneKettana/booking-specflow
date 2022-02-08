@@ -1,8 +1,16 @@
-namespace Booking;
+namespace Booking.Registration;
 
 public class PairLetter : ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>>
 {
     public Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>> Current { get; set; }
+
+    public PairLetter()
+    {
+        Current = new Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>(
+            new Letter(),
+            new Letter()
+        );
+    }
 
     public ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>> next()
     {
@@ -33,5 +41,9 @@ public class PairLetter : ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEn
             )
         };
     }
-    
+    public override string ToString()
+    {
+        return Current.Item1.ToString() + Current.Item2.ToString();
+        
+    }
 }

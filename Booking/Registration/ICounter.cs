@@ -1,4 +1,4 @@
-namespace Booking;
+namespace Booking.Registration;
 
 public interface ICounter<T>
 {

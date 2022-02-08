@@ -7,6 +7,7 @@ public class CarStepDefinition
 {
     private Car? _car;
     private Garage garage;
+    private Registration.Registration _registration;
 
     [Given(@"I get the list of vehicle")]
     public void GivenIGetTheListOfVehicle()
@@ -23,7 +24,7 @@ public class CarStepDefinition
     [When(@"I get registration id")]
     public void WhenIGetRegistrationId()
     {
-        ScenarioContext.StepIsPending();
+        _registration = _car.Registration;
     }
 
     [Then(@"The id should be unique")]

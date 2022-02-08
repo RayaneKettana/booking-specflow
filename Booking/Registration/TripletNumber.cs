@@ -1,8 +1,8 @@
-namespace Booking;
+namespace Booking.Registration;
 
 public class TripletNumber : ICounter<int>
 {
-    public int Current { get; set; }
+    public int Current { get; set; } = 1;
 
     public ICounter<int> next()
     {
@@ -25,5 +25,10 @@ public class TripletNumber : ICounter<int>
         {
             Current = Int
         };
+    }
+
+    public override string ToString()
+    {
+        return Current.ToString();
     }
 }
