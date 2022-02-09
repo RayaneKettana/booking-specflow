@@ -4,11 +4,11 @@ public enum LetterEnum
 {
     A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z
 }
-public class Letter : ICounter<LetterEnum>
+public class Letter : ICounter<LetterEnum, Letter>
 {
     public LetterEnum Current { get; set; } = LetterEnum.A;
     
-    public ICounter<LetterEnum> next()
+    public Letter next()
     {
         var nextIndex = ((int) Current) + 1;
         return Copy((LetterEnum) nextIndex);
@@ -19,7 +19,7 @@ public class Letter : ICounter<LetterEnum>
         return Current != LetterEnum.Z;
     }
 
-    public ICounter<LetterEnum> reset()
+    public Letter reset()
     {
         return Copy(LetterEnum.A);
     }

@@ -1,13 +1,13 @@
 namespace Booking.Registration;
 
-public interface ICounter<T>
+public interface ICounter<T, out U>
 {
     public T Current { get; set; }
 
-    ICounter<T> next();
+    U next();
 
     Boolean hasNext();
 
-    ICounter<T> reset();
+    U reset();
 
 }

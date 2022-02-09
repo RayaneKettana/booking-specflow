@@ -1,6 +1,6 @@
 namespace Booking.Registration;
 
-public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter>>
+public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter>, Registration>
 {
     public Tuple<PairLetter, TripletNumber, PairLetter> Current { get; set; }
 
@@ -13,7 +13,7 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
         );
     }
 
-    public ICounter<Tuple<PairLetter, TripletNumber, PairLetter>> next()
+    public Registration next()
     {
         if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
         {
@@ -32,7 +32,7 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
         return Current.Item1.hasNext() || Current.Item2.hasNext() || Current.Item3.hasNext();
     }
 
-    public ICounter<Tuple<PairLetter, TripletNumber, PairLetter>> reset()
+    public Registration reset()
     {
         return Copy((PairLetter) Current.Item1.reset(), (TripletNumber) Current.Item2.reset(), (PairLetter) Current.Item3.reset());
     }

@@ -1,10 +1,10 @@
 namespace Booking.Registration;
 
-public class TripletNumber : ICounter<int>
+public class TripletNumber : ICounter<int, TripletNumber>
 {
     public int Current { get; set; } = 1;
 
-    public ICounter<int> next()
+    public TripletNumber next()
     {
         return Copy(Current + 1);
     }
@@ -14,12 +14,12 @@ public class TripletNumber : ICounter<int>
         return Current < 1000;
     }
 
-    public ICounter<int> reset()
+    public TripletNumber reset()
     {
         return Copy(0);
     }
 
-    private static ICounter<int> Copy(int Int)
+    private static TripletNumber Copy(int Int)
     {
         return new TripletNumber
         {

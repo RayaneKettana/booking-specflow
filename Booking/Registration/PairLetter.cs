@@ -1,18 +1,18 @@
 namespace Booking.Registration;
 
-public class PairLetter : ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>>
+public class PairLetter : ICounter<Tuple<Letter, Letter>, PairLetter>
 {
-    public Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>> Current { get; set; }
+    public Tuple<Letter, Letter> Current { get; set; }
 
     public PairLetter()
     {
-        Current = new Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>(
+        Current = new Tuple<Letter, Letter>(
             new Letter(),
             new Letter()
         );
     }
 
-    public ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>> next()
+    public PairLetter next()
     {
         if (!Current.Item2.hasNext())
         {
@@ -27,15 +27,15 @@ public class PairLetter : ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEn
         return Current.Item1.hasNext() || Current.Item2.hasNext();
     }
 
-    public ICounter<Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>> reset()
+    public PairLetter reset()
     {
         return Copy(Current.Item1.reset(), Current.Item2.reset());
     }
-    private static PairLetter Copy(ICounter<LetterEnum> item1, ICounter<LetterEnum> item2)
+    private static PairLetter Copy(Letter item1, Letter item2)
     {
         return new PairLetter()
         {
-            Current = new Tuple<ICounter<LetterEnum>, ICounter<LetterEnum>>(
+            Current = new Tuple<Letter, Letter>(
                 item1,
                 item2
             )
