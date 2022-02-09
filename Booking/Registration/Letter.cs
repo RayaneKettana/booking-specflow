@@ -11,7 +11,9 @@ public class Letter : ICounter<LetterEnum, Letter>
     public Letter next()
     {
         var nextIndex = ((int) Current) + 1;
-        return Copy((LetterEnum) nextIndex);
+        var prev = Copy(Current);
+        Current =  (LetterEnum) nextIndex;
+        return prev;
     }
 
     public bool hasNext()
@@ -24,7 +26,7 @@ public class Letter : ICounter<LetterEnum, Letter>
         return Copy(LetterEnum.A);
     }
 
-    private static Letter Copy(LetterEnum letterEnum)
+    public static Letter Copy(LetterEnum letterEnum)
     {
         return new Letter()
         {

@@ -14,12 +14,15 @@ public class PairLetter : ICounter<Tuple<Letter, Letter>, PairLetter>
 
     public PairLetter next()
     {
+        var prev = Copy(Current.Item1, Current.Item2);
         if (!Current.Item2.hasNext())
         {
-            return Copy(Current.Item1.next(), Current.Item2.reset());
+            Current.Item1.next();
+            Current.Item2.reset();
         }
 
-        return Copy(Current.Item1, Current.Item2.next());
+        Current.Item2.next();
+        return prev;
     }
 
     public bool hasNext()
@@ -31,13 +34,13 @@ public class PairLetter : ICounter<Tuple<Letter, Letter>, PairLetter>
     {
         return Copy(Current.Item1.reset(), Current.Item2.reset());
     }
-    private static PairLetter Copy(Letter item1, Letter item2)
+    public static PairLetter Copy(Letter item1, Letter item2)
     {
         return new PairLetter()
         {
             Current = new Tuple<Letter, Letter>(
-                item1,
-                item2
+                Letter.Copy(item1.Current),
+                Letter.Copy(item2.Current)
             )
         };
     }

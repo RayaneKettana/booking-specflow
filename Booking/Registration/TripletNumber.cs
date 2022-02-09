@@ -6,7 +6,9 @@ public class TripletNumber : ICounter<int, TripletNumber>
 
     public TripletNumber next()
     {
-        return Copy(Current + 1);
+        var prev = Copy(Current);
+        Current++;
+        return prev;
     }
 
     public bool hasNext()
@@ -19,7 +21,7 @@ public class TripletNumber : ICounter<int, TripletNumber>
         return Copy(0);
     }
 
-    private static TripletNumber Copy(int Int)
+    public static TripletNumber Copy(int Int)
     {
         return new TripletNumber
         {

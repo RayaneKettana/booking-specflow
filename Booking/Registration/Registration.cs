@@ -15,16 +15,21 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
 
     public Registration next()
     {
+        var prev = Copy(Current.Item1, Current.Item2, Current.Item3);
         if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
         {
-            return Copy(Current.Item1.next() as PairLetter, Current.Item2.reset() as TripletNumber, Current.Item3.reset() as PairLetter);
+            Current.Item1.next();
+            Current.Item2.reset(); 
+            Current.Item3.reset();
         }
         if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
         {
-            return Copy(Current.Item1, Current.Item2.next() as TripletNumber, Current.Item3.reset() as PairLetter);
+            Current.Item2.next();
+            Current.Item3.reset();
         }
 
-        return Copy(Current.Item1, Current.Item2, Current.Item3.next() as PairLetter);
+        Current.Item3.next();
+        return prev;
     }
 
     public bool hasNext()
@@ -42,9 +47,9 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
         return new Registration()
         {
             Current = new Tuple<PairLetter, TripletNumber, PairLetter>(
-                item1,
-                item2,
-                item3
+                PairLetter.Copy(item1.Current.Item1, item1.Current.Item2),
+                TripletNumber.Copy(item2.Current),
+                PairLetter.Copy(item3.Current.Item1, item3.Current.Item2)
             )
         };
     }
