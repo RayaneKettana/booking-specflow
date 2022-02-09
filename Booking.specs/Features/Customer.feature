@@ -2,7 +2,6 @@ Feature: Customer
 Customer scenario
 
     Scenario: The customer want to create a account
-        Given I am a person without an account
         When I create an account
         Then I'm connected
 

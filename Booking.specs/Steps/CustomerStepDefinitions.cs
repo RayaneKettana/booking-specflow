@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Booking.Customer;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace Booking.Steps;
 
@@ -12,7 +14,8 @@ public sealed class CustomerStepDefinitions
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
     private readonly ScenarioContext _scenarioContext;
-    private Customer.Customer _customer;
+    private string _customer;
+
 
     public CustomerStepDefinitions(ScenarioContext scenarioContext)
     {
@@ -61,6 +64,17 @@ public sealed class CustomerStepDefinitions
 
     [Given(@"I am a person without an account")]
     public void GivenIAmAPersonWithoutAnAccount()
+    {
+    }
+
+    [When(@"I create an account")]
+    public void WhenICreateAnAccount()
+    {
+        _customer = CustomerStore.GetInstance().Register("Enzo", "Jens", new DateOnly(06, 02, 1998), new DateOnly(06, 02, 2018), "123bcdf1");
+    }
+
+    [Then(@"I'm connected")]
+    public void ThenImConnected()
     {
 
     }
