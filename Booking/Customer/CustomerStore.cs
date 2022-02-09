@@ -18,25 +18,24 @@ public class CustomerStore
             {
                 new Customer("John",
                     "Smith",
-                    new DateOnly(06, 02, 1998),
-                    new DateOnly(12, 05, 2018),
+                    new DateOnly(1998, 06, 02),
+                    new DateOnly(2018, 02,05),
                     "1234565431"),
 
                 new Customer("Mike",
                     "Adams",
-                    new DateOnly(12, 04, 1995),
-                    new DateOnly(10, 05, 2014),
+                    new DateOnly(1995,12, 04),
+                    new DateOnly(2014, 10, 05),
                     "198721431"),
             }
         );
     }
 
-    public string Register(string firstName, string lastName, DateOnly birthday, DateOnly datePermitObtained,
+    public AuthenticatedDecorator Register(string firstName, string lastName, DateOnly birthday, DateOnly datePermitObtained,
         string drivingLicenceNumber)
     {
         var newCustomer = new Customer(firstName, lastName, birthday, datePermitObtained, drivingLicenceNumber);
         _customerList.Add(newCustomer);
-        var message = "Welcome";
-        return message; 
+        return new AuthenticatedDecorator(newCustomer); 
     }
 }

@@ -14,7 +14,7 @@ public sealed class CustomerStepDefinitions
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
     private readonly ScenarioContext _scenarioContext;
-    private string _customer;
+    private AuthenticatedDecorator _customer;
 
 
     public CustomerStepDefinitions(ScenarioContext scenarioContext)
@@ -70,12 +70,13 @@ public sealed class CustomerStepDefinitions
     [When(@"I create an account")]
     public void WhenICreateAnAccount()
     {
-        _customer = CustomerStore.GetInstance().Register("Enzo", "Jens", new DateOnly(06, 02, 1998), new DateOnly(06, 02, 2018), "123bcdf1");
+        _customer = CustomerStore.GetInstance().Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1");
     }
 
     [Then(@"I'm connected")]
     public void ThenImConnected()
     {
+        Assert.True(_customer.isConnected());
 
     }
 }
