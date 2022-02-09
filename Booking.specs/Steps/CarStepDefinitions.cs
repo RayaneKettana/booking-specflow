@@ -30,7 +30,7 @@ public class CarStepDefinition
     [Then(@"The id should be unique")]
     public void ThenTheIdShouldBeUnique()
     {
-        ScenarioContext.StepIsPending();
+        Assert.Single(Garage.GetInstance().Gets().FindAll(car => car.Registration.ToString() == _car.Registration.ToString()));
     }
 
     [Then(@"it has a brand")]

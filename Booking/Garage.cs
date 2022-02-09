@@ -23,4 +23,10 @@ public class Garage
     {
         return carsList.ElementAtOrDefault(index);
     }
+
+    public List<Car> Gets()
+    {
+        return carsList;
+    }
+    
 }
