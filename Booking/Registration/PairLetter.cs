@@ -15,13 +15,15 @@ public class PairLetter : ICounter<Tuple<Letter, Letter>, PairLetter>
     public PairLetter next()
     {
         var prev = Copy(Current.Item1, Current.Item2);
-        if (!Current.Item2.hasNext())
+        if (Current.Item2.hasNext())
+        {
+            Current.Item2.next();
+        } else
         {
             Current.Item1.next();
             Current.Item2.reset();
         }
 
-        Current.Item2.next();
         return prev;
     }
 

@@ -21,14 +21,16 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
             Current.Item1.next();
             Current.Item2.reset(); 
             Current.Item3.reset();
-        }
-        if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
+        } else if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
         {
             Current.Item2.next();
             Current.Item3.reset();
         }
+        else
+        {
+            Current.Item3.next();
+        }
 
-        Current.Item3.next();
         return prev;
     }
 
