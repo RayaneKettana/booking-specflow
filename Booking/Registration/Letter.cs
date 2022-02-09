@@ -21,9 +21,9 @@ public class Letter : ICounter<LetterEnum, Letter>
         return Current != LetterEnum.Z;
     }
 
-    public Letter reset()
+    public void reset()
     {
-        return Copy(LetterEnum.A);
+        Current = LetterEnum.A;
     }
 
     public static Letter Copy(LetterEnum letterEnum)

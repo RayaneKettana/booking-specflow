@@ -30,9 +30,10 @@ public class PairLetter : ICounter<Tuple<Letter, Letter>, PairLetter>
         return Current.Item1.hasNext() || Current.Item2.hasNext();
     }
 
-    public PairLetter reset()
+    public void reset()
     {
-        return Copy(Current.Item1.reset(), Current.Item2.reset());
+        Current.Item1.reset();
+        Current.Item2.reset();
     }
     public static PairLetter Copy(Letter item1, Letter item2)
     {

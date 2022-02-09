@@ -16,9 +16,9 @@ public class TripletNumber : ICounter<int, TripletNumber>
         return Current < 1000;
     }
 
-    public TripletNumber reset()
+    public void reset()
     {
-        return Copy(0);
+        Current = 0;
     }
 
     public static TripletNumber Copy(int Int)

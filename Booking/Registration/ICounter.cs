@@ -8,6 +8,6 @@ public interface ICounter<T, out U>
 
     Boolean hasNext();
 
-    U reset();
+    void reset();
 
 }

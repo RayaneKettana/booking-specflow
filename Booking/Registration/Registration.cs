@@ -37,9 +37,11 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
         return Current.Item1.hasNext() || Current.Item2.hasNext() || Current.Item3.hasNext();
     }
 
-    public Registration reset()
+    public void reset()
     {
-        return Copy((PairLetter) Current.Item1.reset(), (TripletNumber) Current.Item2.reset(), (PairLetter) Current.Item3.reset());
+        Current.Item1.reset();
+        Current.Item2.reset();
+        Current.Item3.reset();
     }
 
     private static Registration Copy(PairLetter item1, TripletNumber item2, PairLetter item3)
