@@ -14,7 +14,7 @@ public sealed class CustomerStepDefinitions
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
     private readonly ScenarioContext _scenarioContext;
-    private AuthenticatedDecorator _customer;
+    private AuthenticatedCustomer _customer;
 
 
     public CustomerStepDefinitions(ScenarioContext scenarioContext)

@@ -31,11 +31,11 @@ public class CustomerStore
         );
     }
 
-    public AuthenticatedDecorator Register(string firstName, string lastName, DateOnly birthday, DateOnly datePermitObtained,
+    public AuthenticatedCustomer Register(string firstName, string lastName, DateOnly birthday, DateOnly datePermitObtained,
         string drivingLicenceNumber)
     {
         var newCustomer = new Customer(firstName, lastName, birthday, datePermitObtained, drivingLicenceNumber);
         _customerList.Add(newCustomer);
-        return new AuthenticatedDecorator(newCustomer); 
+        return new AuthenticatedCustomer(newCustomer); 
     }
 }

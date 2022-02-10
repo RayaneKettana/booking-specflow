@@ -3,12 +3,12 @@ using Timer = System.Timers.Timer;
 
 namespace Booking.Customer;
 
-public class AuthenticatedDecorator : CustomerDecorator
+public class AuthenticatedCustomer : CustomerDecorator
 {
    private readonly Timer timer;
    private bool IsConnected = true;
 
-   public AuthenticatedDecorator(ICustomer customer) : base(customer)
+   public AuthenticatedCustomer(ICustomer customer) : base(customer)
    {
       timer = new System.Timers.Timer(2000000);
       timer.Elapsed += Disconnect;
