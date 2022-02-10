@@ -7,19 +7,19 @@ namespace Booking.Steps;
 public class CarStepDefinition
 {
     private Car.Car? _car;
-    private Garage garage;
+    private CarStore _carStore;
     private Registration.Registration _registration;
 
     [Given(@"I get the list of vehicle")]
     public void GivenIGetTheListOfVehicle()
     {
-        garage = Garage.GetInstance();
+        _carStore = CarStore.GetInstance();
     }
 
     [Given(@"I take the first"), When(@"I take the first")]
     public void wGivenITakeTheFirst()
     {
-        _car = garage.Get(0);
+        _car = _carStore.Get(0);
     }
 
     [When(@"I get registration id")]
@@ -31,7 +31,7 @@ public class CarStepDefinition
     [Then(@"The id should be unique")]
     public void ThenTheIdShouldBeUnique()
     {
-        Assert.Single(Garage.GetInstance().Gets().FindAll(car => car.Registration.ToString() == _car.Registration.ToString()));
+        Assert.Single(CarStore.GetInstance().Gets().FindAll(car => car.Registration.ToString() == _car.Registration.ToString()));
     }
 
     [Then(@"it has a brand")]

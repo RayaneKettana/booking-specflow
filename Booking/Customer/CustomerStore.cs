@@ -5,7 +5,7 @@ namespace Booking.Customer;
 public class CustomerStore
 {
     private static CustomerStore? _customer;
-    private readonly List<Customer> _customerList;
+    public  List<Customer> _customerList { get; }
 
     public CustomerStore(List<Customer> customers)
     {
@@ -30,6 +30,7 @@ public class CustomerStore
             }
         );
     }
+    
 
     public AuthenticatedCustomer Register(string firstName, string lastName, DateOnly birthday, DateOnly datePermitObtained,
         string drivingLicenceNumber, string password)
