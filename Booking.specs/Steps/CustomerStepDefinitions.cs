@@ -70,7 +70,7 @@ public sealed class CustomerStepDefinitions
     [When(@"I create an account")]
     public void WhenICreateAnAccount()
     {
-        _customer = CustomerStore.GetInstance().Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1");
+        _customer = CustomerStore.GetInstance().Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1","abcdefe12");
     }
 
     [Then(@"I'm connected")]

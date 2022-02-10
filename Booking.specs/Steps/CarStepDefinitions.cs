@@ -16,7 +16,7 @@ public class CarStepDefinition
     }
 
     [Given(@"I take the first"), When(@"I take the first")]
-    public void GivenITakeTheFirst()
+    public void wGivenITakeTheFirst()
     {
         _car = garage.Get(0);
     }

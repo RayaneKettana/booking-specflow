@@ -8,6 +8,8 @@ public class CustomerDecorator : ICustomer
     public DateOnly Birthday => _customer.Birthday;
     public DateOnly DatePermitObtained => _customer.DatePermitObtained;
     public string DrivingLicenceNumber => _customer.DrivingLicenceNumber;
+    public string Password => _customer.Password;
+    
     protected ICustomer _customer;
 
     public CustomerDecorator(ICustomer customer)

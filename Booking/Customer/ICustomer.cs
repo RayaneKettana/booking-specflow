@@ -7,6 +7,7 @@ public interface ICustomer
     DateOnly Birthday { get; }
     DateOnly DatePermitObtained { get; }
     string DrivingLicenceNumber { get; }
+    string Password { get; }
 
     public bool isConnected();
 
