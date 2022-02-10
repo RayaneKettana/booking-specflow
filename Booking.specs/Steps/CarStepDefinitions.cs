@@ -1,3 +1,4 @@
+using Booking.Car;
 using Xunit;
 
 namespace Booking.Steps;
@@ -5,7 +6,7 @@ namespace Booking.Steps;
 [Binding]
 public class CarStepDefinition
 {
-    private Car? _car;
+    private Car.Car? _car;
     private Garage garage;
     private Registration.Registration _registration;
 

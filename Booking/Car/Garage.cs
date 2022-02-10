@@ -1,4 +1,4 @@
-namespace Booking;
+namespace Booking.Car;
 
 public class Garage
 {

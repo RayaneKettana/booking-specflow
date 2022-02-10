@@ -1,6 +1,6 @@
 using Booking.Registration;
 
-namespace Booking;
+namespace Booking.Car;
 
 public class Car
 {
