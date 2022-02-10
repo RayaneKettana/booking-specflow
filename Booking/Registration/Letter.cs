@@ -10,9 +10,12 @@ public class Letter : ICounter<LetterEnum, Letter>
     
     public Letter next()
     {
-        var nextIndex = ((int) Current) + 1;
         var prev = Copy(Current);
-        Current =  (LetterEnum) nextIndex;
+        if (Current != LetterEnum.Z)
+        {
+            var nextIndex = ((int) Current) + 1;
+            Current =  (LetterEnum) nextIndex;
+        }
         return prev;
     }
 
