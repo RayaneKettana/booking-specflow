@@ -16,12 +16,12 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
     public Registration next()
     {
         var prev = Copy(Current.Item1, Current.Item2, Current.Item3);
-        if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
+        if (!Current.Item3.hasNext() & !Current.Item2.hasNext())
         {
             Current.Item1.next();
             Current.Item2.reset(); 
             Current.Item3.reset();
-        } else if (!Current.Item3.hasNext() && !Current.Item2.hasNext())
+        } else if (!Current.Item3.hasNext())
         {
             Current.Item2.next();
             Current.Item3.reset();
@@ -36,7 +36,7 @@ public class Registration : ICounter<Tuple<PairLetter, TripletNumber, PairLetter
 
     public bool hasNext()
     {
-        return Current.Item1.hasNext() || Current.Item2.hasNext() || Current.Item3.hasNext();
+        return Current.Item1.hasNext() | Current.Item2.hasNext() | Current.Item3.hasNext();
     }
 
     public void reset()

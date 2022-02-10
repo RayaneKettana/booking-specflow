@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Booking.Registration;
 using Xunit;

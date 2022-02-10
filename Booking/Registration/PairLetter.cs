@@ -15,7 +15,7 @@ public class PairLetter : ICounter<Tuple<Letter, Letter>, PairLetter>
     public PairLetter next()
     {
         var prev = Copy(Current.Item1, Current.Item2);
-        if (Current.Item1.Current != LetterEnum.Z || Current.Item2.Current != LetterEnum.Z)
+        if (!(Current.Item1.Current == LetterEnum.Z & Current.Item2.Current == LetterEnum.Z))
         {
             if (Current.Item2.hasNext())
             {

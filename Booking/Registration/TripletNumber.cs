@@ -18,7 +18,7 @@ public class TripletNumber : ICounter<int, TripletNumber>
 
     public void reset()
     {
-        Current = 0;
+        Current = 1;
     }
 
     public static TripletNumber Copy(int Int)
