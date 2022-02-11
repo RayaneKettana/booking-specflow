@@ -21,9 +21,18 @@ public class AuthenticatedCustomer : CustomerDecorator
       IsConnected = false;
    }
 
-   public void Disconnect()
+   public bool Logout()
    {
-      IsConnected = false;
+      try
+      {
+         timer.Close();
+         IsConnected = false;
+         return true;
+      }
+      catch (Exception e)
+      {
+         return false;
+      }
    }
    public bool isConnected()
    {

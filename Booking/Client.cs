@@ -39,9 +39,20 @@ public class Client
     {
         return CheckIsConnected() 
             ? _customer.FirstName + " est connecté" 
-            : " personne n'est connecté";
+            : "personne n'est connecté";
     }
 
+    public string Logout()
+    {
+        if (_customer != null && _customer.Logout())
+        {
+            _customer = null;
+            return "Vous êtes déconnecté";
+        }
+
+        return "Déconnection impossible";
+    }
+    
     public List<Car.Car> GetCarsList(DateTime from, DateTime to)
     {
         return CheckIsConnected() 

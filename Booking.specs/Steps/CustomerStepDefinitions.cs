@@ -70,7 +70,26 @@ public sealed class CustomerStepDefinitions
     [Then(@"I'm connected")]
     public void ThenImConnected()
     {
-        Assert.Equal("Enzo est connecté",_client.Me());
+        Assert.Contains("est connecté", _client.Me());
 
+    }
+
+    [When(@"I Login with a valid account")]
+    [Given(@"I Login with a valid account")]
+    public void WhenILoginWithAValidAccount()
+    {
+        _client.Login("John", "password1234");
+    }
+
+    [When(@"I logout")]
+    public void WhenILogout()
+    {
+        _client.Logout();
+    }
+
+    [Then(@"I'm disconnected")]
+    public void ThenImDisconnected()
+    {
+        Assert.Equal("personne n'est connecté",_client.Me());
     }
 }
