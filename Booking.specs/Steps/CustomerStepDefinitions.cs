@@ -8,7 +8,7 @@ public sealed class CustomerStepDefinitions
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
     private readonly ScenarioContext _scenarioContext;
-    private Client _client = new();
+    private Gateway _gateway = new();
 
 
     public CustomerStepDefinitions(ScenarioContext scenarioContext)
@@ -64,13 +64,13 @@ public sealed class CustomerStepDefinitions
     [When(@"I create an account")]
     public void WhenICreateAnAccount()
     {
-        _client.Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1","abcdefe12");
+        _gateway.Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1","abcdefe12");
     }
 
     [Then(@"I'm connected")]
     public void ThenImConnected()
     {
-        Assert.Contains("est connecté", _client.Me());
+        Assert.Contains("est connecté", _gateway.Me());
 
     }
 
@@ -78,18 +78,18 @@ public sealed class CustomerStepDefinitions
     [Given(@"I Login with a valid account")]
     public void WhenILoginWithAValidAccount()
     {
-        _client.Login("John", "password1234");
+        _gateway.Login("John", "password1234");
     }
 
     [When(@"I logout")]
     public void WhenILogout()
     {
-        _client.Logout();
+        _gateway.Logout();
     }
 
     [Then(@"I'm disconnected")]
     public void ThenImDisconnected()
     {
-        Assert.Equal("personne n'est connecté",_client.Me());
+        Assert.Equal("personne n'est connecté",_gateway.Me());
     }
 }

@@ -9,13 +9,13 @@ public class CarStepDefinition
     private Car.Car? _car;
     private CarStore _carStore;
     private Registration.Registration _registration;
-    private Client _client = new();
+    private Gateway _gateway = new();
     private List<Car.Car> _getCarsList;
     
     [Given(@"I get the list of vehicle")]
     public void GivenIGetTheListOfVehicle()
     {
-        _getCarsList = _client.GetCarsList(DateTime.Now, DateTime.Now.AddHours(16));
+        _getCarsList = _gateway.GetCarsList(DateTime.Now, DateTime.Now.AddHours(16));
     }
 
     [Given(@"I take the first"), When(@"I take the first")]
@@ -57,7 +57,7 @@ public class CarStepDefinition
     [Given(@"I am connected")]
     public void GivenIAmConnected()
     {
-        _client = new Client();
-        var login = _client.Login("John", "password1234");
+        _gateway = new Gateway();
+        var login = _gateway.Login("John", "password1234");
     }
 }

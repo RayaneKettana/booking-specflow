@@ -3,13 +3,13 @@ using Booking.Customer;
 
 namespace Booking;
 
-public class Client
+public class Gateway
 {
     private AuthenticatedCustomer? _customer;
     private CustomerStore _customerStore;
     private BookingService _bookingService;
 
-    public Client()
+    public Gateway()
     {
         _customerStore = CustomerStore.GetInstance();
         _bookingService = BookingService.GetInstance();
