@@ -1,4 +1,5 @@
-﻿using Booking.Data;
+﻿using Booking.Customer;
+using Booking.Data;
 using Booking.Seed;
 
 namespace Booking.Booking;
@@ -27,5 +28,12 @@ public class BookingStore
     public void Init(FakeData<Booking> fakeBookings)
     {
         _dataLayer = fakeBookings;
+    }
+
+
+    public Booking Add(Registration.Registration registration, ICustomer customer, DateTime from, DateTime to)
+    {
+        return _dataLayer.Add(new Booking(registration, customer, from, to));
+        // TO DO Check the booking doesn't exist  
     }
 }

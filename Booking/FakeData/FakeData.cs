@@ -11,8 +11,9 @@ public class FakeData<T> : IDataLayer<T>
         Entities = entities;
     }
 
-    public void Add(T newEntity)
+    public T Add(T newEntity)
     {
-       Entities.Add(newEntity); 
+       Entities.Add(newEntity);
+       return newEntity;
     }
 }

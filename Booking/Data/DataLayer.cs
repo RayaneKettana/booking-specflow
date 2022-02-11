@@ -9,9 +9,10 @@ public class DataLayer <T> : IDataLayer<T>
         Entities = new List<T>();
     }
 
-    public void Add(T newEntity)
+    public T Add(T newEntity)
     {
         Entities.Add(newEntity);
+        return newEntity;
     }
     
 }

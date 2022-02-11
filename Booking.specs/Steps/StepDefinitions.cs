@@ -1,5 +1,6 @@
 using Booking.Car;
 using Booking.Seed;
+using FluentAssertions;
 using Xunit;
 
 namespace Booking.Steps;
@@ -18,6 +19,8 @@ public sealed class StepDefinitions
     private List<Car.Car> _getAvailableCar;
     public List<Car.Car> _fakeCars;
     public List<Customer.Customer> _fakeCustomer;
+    private string _message;
+
 
     public StepDefinitions(ScenarioContext scenarioContext)
     {
@@ -214,5 +217,18 @@ public sealed class StepDefinitions
     public void GivenTheClientInitialized()
     {
         _gateway = new Gateway(fakeCustomers: new FakeData<Customer.Customer>(_fakeCustomer), fakeCars: new FakeData<Car.Car>(_fakeCars));
+    }
+
+    [When(@"I book a car")]
+    public void WhenIBookACar()
+    {
+        var car = _getAvailableCar.FirstOrDefault();
+        _message = _gateway.Book(car.Registration, DateTime.Now, DateTime.Now.AddDays(2));
+    }
+
+    [Then(@"The car is booked")]
+    public void ThenTheCarIsBooked()
+    {
+        _message.Should().Be("Réservation est un succès");
     }
 }

@@ -75,12 +75,22 @@ public class Gateway
         return CheckIsConnected() 
             ? _bookingService.getAvailableCar(from, to)
             : new List<Car.Car>();
-
     }
 
     private bool CheckIsConnected()
     {
         return _customer != null && _customer.isConnected();
+    }
+
+    public string Book(Registration.Registration registration, DateTime from, DateTime to)
+    {
+        if (CheckIsConnected())
+        {
+            _bookingService.AddBooking(registration, _customer, from, to);
+            return "Réservation est un succès";
+        }
+
+        return "Réservation impossible";
     }
     
 }

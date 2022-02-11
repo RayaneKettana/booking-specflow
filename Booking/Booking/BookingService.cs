@@ -1,4 +1,5 @@
 ﻿using Booking.Car;
+using Booking.Customer;
 
 namespace Booking.Booking;
 
@@ -26,5 +27,10 @@ public class BookingService
             .Select((booking => booking.RegistrationCar)).ToList();
 
         return _carStore.GetAllCarsExcept(unavailableRegistrations);
+    }
+
+    public void AddBooking(Registration.Registration registration, AuthenticatedCustomer customer, DateTime from, DateTime to)
+    {
+        _bookingStore.Add(registration, customer, from, to);
     }
 }
