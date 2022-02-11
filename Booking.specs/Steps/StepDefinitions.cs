@@ -25,6 +25,7 @@ public sealed class StepDefinitions
     public StepDefinitions(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
+        _scenarioContext.StepContext.Add("gateway", _gateway);
     }
     
     [Given(@"I get the list of vehicle")]

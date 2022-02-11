@@ -26,3 +26,5 @@ Customer scenario
         Given I'm connected
         When I insert a start and end date
         Then The list of available vehicles appears
+        
+         
