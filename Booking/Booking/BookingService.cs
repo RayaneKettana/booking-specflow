@@ -5,10 +5,10 @@ namespace Booking.Booking;
 public class BookingService
 {
     private BookingStore _bookingStore;
-    private Car.CarStore _carStore;
+    private CarStore _carStore;
     private static BookingService? _instance;
 
-    public static BookingService getInstance()
+    public static BookingService GetInstance()
     {
         return _instance ??= new BookingService(BookingStore.GetInstance(), CarStore.GetInstance());
     }
@@ -22,7 +22,7 @@ public class BookingService
     public List<Car.Car> getAvailableCar(DateTime from, DateTime to)
     {
         var unavailableRegistrations = _bookingStore
-            .getByPeriod(from, to)
+            .GetByPeriod(from, to)
             .Select((booking => booking.RegistrationCar)).ToList();
 
         return _carStore.GetAllCarsExcept(unavailableRegistrations);

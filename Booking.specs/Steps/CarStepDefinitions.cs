@@ -9,17 +9,19 @@ public class CarStepDefinition
     private Car.Car? _car;
     private CarStore _carStore;
     private Registration.Registration _registration;
-
+    private Client _client = new();
+    private List<Car.Car> _getCarsList;
+    
     [Given(@"I get the list of vehicle")]
     public void GivenIGetTheListOfVehicle()
     {
-        _carStore = CarStore.GetInstance();
+        _getCarsList = _client.GetCarsList(DateTime.Now, DateTime.Now.AddHours(16));
     }
 
     [Given(@"I take the first"), When(@"I take the first")]
-    public void wGivenITakeTheFirst()
+    public void GivenITakeTheFirst()
     {
-        _car = _carStore.Get(0);
+        _car = _getCarsList.FirstOrDefault();
     }
 
     [When(@"I get registration id")]
@@ -51,5 +53,11 @@ public class CarStepDefinition
     {
         Assert.Equal("black",_car.Color);
     }
-    
+
+    [Given(@"I am connected")]
+    public void GivenIAmConnected()
+    {
+        _client = new Client();
+        var login = _client.Login("John", "password1234");
+    }
 }

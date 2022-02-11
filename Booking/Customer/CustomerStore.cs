@@ -39,4 +39,12 @@ public class CustomerStore
         _customerList.Add(newCustomer);
         return new AuthenticatedCustomer(newCustomer);
     }
+
+    public AuthenticatedCustomer? Login(string firstName, string password)
+    {
+        Customer? customer = _customerList.FirstOrDefault(customer =>
+            customer.firstName == firstName & customer.password == password);
+        return customer != null ? new AuthenticatedCustomer(customer) : null;
+    }
+    
 }

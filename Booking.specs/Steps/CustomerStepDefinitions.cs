@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Booking.Customer;
-using TechTalk.SpecFlow;
 using Xunit;
 
 namespace Booking.Steps;
@@ -14,7 +8,7 @@ public sealed class CustomerStepDefinitions
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
     private readonly ScenarioContext _scenarioContext;
-    private AuthenticatedCustomer _customer;
+    private Client _client = new();
 
 
     public CustomerStepDefinitions(ScenarioContext scenarioContext)
@@ -70,13 +64,13 @@ public sealed class CustomerStepDefinitions
     [When(@"I create an account")]
     public void WhenICreateAnAccount()
     {
-        _customer = CustomerStore.GetInstance().Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1","abcdefe12");
+        _client.Register("Enzo", "Jens", new DateOnly(1998, 02, 21), new DateOnly(2018, 02, 1), "123bcdf1","abcdefe12");
     }
 
     [Then(@"I'm connected")]
     public void ThenImConnected()
     {
-        Assert.True(_customer.isConnected());
+        Assert.Equal("Enzo est connecté",_client.Me());
 
     }
 }
