@@ -1,5 +1,7 @@
 using Booking.Booking;
+using Booking.Car;
 using Booking.Customer;
+using Booking.Seed;
 
 namespace Booking;
 
@@ -8,12 +10,27 @@ public class Gateway
     private AuthenticatedCustomer? _customer;
     private CustomerStore _customerStore;
     private BookingService _bookingService;
+    private BookingStore _bookingStore;
+    private CarStore _carStore;
 
     public Gateway()
     {
         _customerStore = CustomerStore.GetInstance();
         _bookingService = BookingService.GetInstance();
     }
+    public Gateway(FakeData<Customer.Customer>? fakeCustomers = null,
+        FakeData<Car.Car>? fakeCars = null,
+        FakeData<Booking.Booking>? fakeBookings = null)
+    {
+        _customerStore = CustomerStore.GetInstance();
+        if (fakeCustomers != null) _customerStore.init(fakeCustomers);
+        _bookingStore = BookingStore.GetInstance();
+        if (fakeBookings != null) _bookingStore.Init(fakeBookings);
+        _carStore = CarStore.GetInstance();
+        if (fakeCars != null) _carStore.init(fakeCars);
+        _bookingService = BookingService.GetInstance();
+    }
+
 
     public string Register(string firstName, string lastName, DateOnly birthday, DateOnly datePermitObtained,
         string drivingLicenceNumber, string password)

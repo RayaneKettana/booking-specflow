@@ -1,9 +1,17 @@
-﻿namespace Booking.Booking;
+﻿using Booking.Data;
+using Booking.Seed;
+
+namespace Booking.Booking;
 
 public class BookingStore
 {
     private static BookingStore? _bookingStore;
-    private readonly List<Booking> _bookingsList = new List<Booking>();
+    private IDataLayer<Booking> _dataLayer;
+
+    public BookingStore()
+    {
+        _dataLayer = new DataLayer<Booking>();
+    }
     
 
     public static BookingStore GetInstance()
@@ -13,7 +21,11 @@ public class BookingStore
 
     public List<Booking> GetByPeriod(DateTime from, DateTime to)
     {
-        return _bookingsList.FindAll(booking => from <= booking.From && to >= booking.To);
+        return _dataLayer.Entities.FindAll(booking => from <= booking.From && to >= booking.To);
     }
-    
+
+    public void Init(FakeData<Booking> fakeBookings)
+    {
+        _dataLayer = fakeBookings;
+    }
 }

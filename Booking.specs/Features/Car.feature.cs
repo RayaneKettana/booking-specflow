@@ -75,6 +75,54 @@ namespace Booking.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+    #line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "color",
+                        "brand",
+                        "model"});
+            table2.AddRow(new string[] {
+                        "black",
+                        "BMW",
+                        "Serie 3"});
+            table2.AddRow(new string[] {
+                        "grey",
+                        "DACIA",
+                        "Duster"});
+#line 5
+        testRunner.Given("the following cars exists", ((string)(null)), table2, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Firstname",
+                        "LastName",
+                        "Birthday",
+                        "DatePermitObtained",
+                        "DrivingLicenceNumber",
+                        "Password"});
+            table3.AddRow(new string[] {
+                        "John",
+                        "Smith",
+                        "Dec 4, 1998",
+                        "Feb 5, 2018",
+                        "1234565431",
+                        "password1234"});
+            table3.AddRow(new string[] {
+                        "Mike",
+                        "Adams",
+                        "Dec 4, 1995",
+                        "Oct 5, 2014",
+                        "1987214312",
+                        "password4321"});
+#line 9
+        testRunner.And("the following customers exist", ((string)(null)), table3, "And ");
+#line hidden
+#line 13
+        testRunner.And("the client initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
@@ -90,7 +138,7 @@ namespace Booking.Features
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A car has the unique id", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 5
+#line 16
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -110,19 +158,22 @@ namespace Booking.Features
             else
             {
                 this.ScenarioStart();
-#line 6
-        testRunner.Given("I am connected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 4
+    this.FeatureBackground();
 #line hidden
-#line 7
+#line 17
+        testRunner.Given("I Login with a valid account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
         testRunner.And("I get the list of vehicle", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 8
+#line 19
         testRunner.And("I take the first", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 9
+#line 20
         testRunner.When("I get registration id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 10
+#line 21
         testRunner.Then("The id should be unique", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -137,7 +188,7 @@ namespace Booking.Features
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A car has the right attributes", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 12
+#line 23
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -157,22 +208,25 @@ namespace Booking.Features
             else
             {
                 this.ScenarioStart();
-#line 13
-        testRunner.Given("I am connected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 4
+    this.FeatureBackground();
 #line hidden
-#line 14
+#line 24
+        testRunner.Given("I Login with a valid account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 25
         testRunner.And("I get the list of vehicle", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 15
+#line 26
         testRunner.When("I take the first", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 16
+#line 27
         testRunner.Then("it has a brand", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 17
+#line 28
         testRunner.And("it has a model", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 18
+#line 29
         testRunner.And("it has a color", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

@@ -1,34 +1,27 @@
 using System.Reflection.Metadata;
+using Booking.Data;
+using Booking.Seed;
 
 namespace Booking.Customer;
 
 public class CustomerStore
 {
     private static CustomerStore? _customer;
-    public  List<Customer> _customerList { get; }
+    private IDataLayer<Customer> _dataLayer;
 
-    public CustomerStore(List<Customer> customers)
+    public CustomerStore()
     {
-        _customerList = customers;
+        _dataLayer = new DataLayer<Customer>();
     }
 
+    public void init(FakeData<Customer> fakeCustomers)
+    {
+        _dataLayer = fakeCustomers;
+    }
+    
     public static CustomerStore GetInstance()
     {
-        return _customer ??= new CustomerStore(new List<Customer>
-            {
-                new Customer("John",
-                    "Smith",
-                    new DateOnly(1998, 06, 02),
-                    new DateOnly(2018, 02,05),
-                    "1234565431", password:"password1234"),
-
-                new Customer("Mike",
-                    "Adams",
-                    new DateOnly(1995,12, 04),
-                    new DateOnly(2014, 10, 05),
-                    "198721431", "password4321"),
-            }
-        );
+        return _customer ??= new CustomerStore();
     }
     
 
@@ -36,13 +29,13 @@ public class CustomerStore
         string drivingLicenceNumber, string password)
     {
         var newCustomer = new Customer(firstName, lastName, birthday, datePermitObtained, drivingLicenceNumber, password);
-        _customerList.Add(newCustomer);
+        _dataLayer.Add(newCustomer);
         return new AuthenticatedCustomer(newCustomer);
     }
 
     public AuthenticatedCustomer? Login(string firstName, string password)
     {
-        Customer? customer = _customerList.FirstOrDefault(customer =>
+        Customer? customer = _dataLayer.Entities.FirstOrDefault(customer =>
             customer.firstName == firstName & customer.password == password);
         return customer != null ? new AuthenticatedCustomer(customer) : null;
     }
