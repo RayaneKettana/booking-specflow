@@ -20,6 +20,7 @@ public sealed class StepDefinitions
     public List<Car.Car> _fakeCars;
     public List<Customer.Customer> _fakeCustomer;
     private string _message;
+    private List<Car.Car> _cars;
 
 
     public StepDefinitions(ScenarioContext scenarioContext)
@@ -231,5 +232,17 @@ public sealed class StepDefinitions
     public void ThenTheCarIsBooked()
     {
         _message.Should().Be("Réservation est un succès");
+    }
+
+    [When(@"I insert a start and end date")]
+    public void WhenIInsertAStartAndEndDate()
+    {
+        _cars = _gateway.GetCarsList(DateTime.Now, DateTime.Now.AddHours(6));
+    }
+
+    [Then(@"The list of available vehicles appears")]
+    public void ThenTheListOfAvailableVehiclesAppears()
+    {
+        _cars.Should().NotBeEmpty().And.BeOfType(typeof(List<Car.Car>));
     }
 }
