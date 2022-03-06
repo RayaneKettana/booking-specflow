@@ -1,12 +1,16 @@
+using Booking.Car;
+
 namespace Booking.Booking;
 
 public class ClosedBooking : BookingDecorator
 {
-    private readonly short _actualKilometers;
+    public short ActualKilometers { get; }
+    public Bill ActualBill { get; }
 
     public ClosedBooking(IBooking booking, short actualKilometers) : base(booking)
     {
-        _actualKilometers = actualKilometers;
+        ActualKilometers = actualKilometers;
+        ActualBill = new Bill(booking, actualKilometers);
     }
     
 }

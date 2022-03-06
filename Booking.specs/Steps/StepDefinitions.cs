@@ -1,4 +1,5 @@
 using Booking.Car;
+using Booking.Registration;
 using Booking.Seed;
 using FluentAssertions;
 using Xunit;
@@ -75,6 +76,7 @@ public sealed class StepDefinitions
     [Given(@"the following cars exists")]
     public void GivenTheFollowingCarsExists(Table table)
     {
+        RegistrationSingleton.GetInstance().reset();
         _fakeCars = new List<Car.Car>();
         foreach (var row in table.Rows)
         {
@@ -191,7 +193,7 @@ public sealed class StepDefinitions
     public void WhenIBookACar()
     {
         _car = _getAvailableCar.FirstOrDefault();
-        _message = _gateway.Book(_car.Registration, DateTime.Now, DateTime.Now.AddDays(2));
+        _message = _gateway.Book(_car.Registration, DateTime.Now, DateTime.Now.AddDays(2), 150);
     }
 
     [Then(@"The car is booked")]
@@ -224,15 +226,15 @@ public sealed class StepDefinitions
         _message = _gateway.CloseBooking(_car.Registration.ToString(), 130);
     }
 
-    [Then(@"I receive a bill")]
-    public void ThenIReceiveABill()
-    {
-        _message.Should().Be("Réservation cloturée");
-    }
-
     [Given(@"I take the car")]
     public void GivenITakeTheCar()
     {
         _message = _gateway.StartBooking(_car.Registration.ToString());
+    }
+
+    [Then(@"I receive the message ""(.*)""")]
+    public void ThenIReceiveTheMessage(string message)
+    {
+        _message.Should().Be(message);
     }
 }

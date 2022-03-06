@@ -24,20 +24,26 @@ public class BookingService
     {
         var unavailableRegistrations = _bookingStore
             .GetByPeriod(from, to)
-            .Select((booking => booking.RegistrationCar)).ToList();
+            .Select((booking => booking.Car.Registration)).ToList();
 
         return _carStore.GetAllCarsExcept(unavailableRegistrations);
     }
 
-    public void AddBooking(Registration.Registration registration, AuthenticatedCustomer customer, DateTime from, DateTime to)
+    public Bill AddBooking(Registration.Registration registration, AuthenticatedCustomer customer, DateTime from, DateTime to, short forecastKilometer)
     {
-        _bookingStore.Add(registration, customer, from, to);
+        var byRegistration = _carStore.GetByRegistration(registration);
+        var car = byRegistration
+                  ?? throw new InvalidOperationException("Car corresponding to this registration not found : " + registration);
+        return _bookingStore.Add(car, customer, from, to, forecastKilometer)
+            ?? throw new InvalidOperationException("Booking is not create" + registration);
     }
 
-    public ClosedBooking closeBooking(string registration, short actualKilometer)
+    public Bill CloseBooking(string registration, short actualKilometer)
     {
-        var booking = _bookingStore.GetOpenByRegistration(registration);
-        return _bookingStore.Close(booking ?? throw new InvalidOperationException("Open booking corresponding to this registration not found"), actualKilometer);
+        var booking = _bookingStore.GetOpenByRegistration(registration) 
+                      ?? throw new InvalidOperationException("Open booking corresponding to this registration not found");
+        var closedBooking = _bookingStore.Close(booking , actualKilometer);
+        return closedBooking.ActualBill;
     }
 
     public IBooking startBooking(string registration)

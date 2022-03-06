@@ -6,19 +6,23 @@ namespace Booking.Booking;
 public class Booking : IBooking
 {
     public Guid Id { get; }
-    public Registration.Registration RegistrationCar { get; private set; }
+    public ICar Car { get; private set; }
     public ICustomer Customer { get; private set; }
     public DateTime From { get; private set; }
     public DateTime To { get; private set; }
     public Boolean isOpen { get; set; }
+    public Bill ForecastBill { get; }
+    public short ForecastKilometers { get; }
 
-    public Booking(Registration.Registration registrationCar, ICustomer customer, DateTime @from, DateTime to)
+    public Booking(ICar car, ICustomer customer, DateTime @from, DateTime to, short forecastKilometers)
     {
         Id = Guid.NewGuid();
-        RegistrationCar = registrationCar ?? throw new ArgumentNullException(nameof(registrationCar));
+        Car = car ?? throw new ArgumentNullException(nameof(car));
         Customer = customer ?? throw new ArgumentNullException(nameof(customer));
         From = @from;
         To = to;
+        ForecastKilometers = forecastKilometers;
+        ForecastBill = new Bill(this, forecastKilometers);
     }
 
     public override bool Equals(Object obj)

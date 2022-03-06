@@ -1,4 +1,5 @@
-﻿using Booking.Customer;
+﻿using Booking.Car;
+using Booking.Customer;
 using Booking.Data;
 using Booking.Seed;
 
@@ -31,9 +32,9 @@ public class BookingStore
     }
 
 
-    public IBooking? Add(Registration.Registration registration, ICustomer customer, DateTime from, DateTime to)
+    public Bill? Add(ICar car, ICustomer customer, DateTime from, DateTime to, short forecastKilometer)
     {
-        return _dataLayer.Add(new Booking(registration, customer, from, to));
+        return _dataLayer.Add(new Booking(car, customer, from, to, forecastKilometer)).ForecastBill;
         // TO DO Check the booking doesn't exist  
     }
 
@@ -53,7 +54,7 @@ public class BookingStore
     private IEnumerable<IBooking> EntitiesWhereRegistration(string registration)
     {
         return _dataLayer.Entities
-            .Where(booking => booking.RegistrationCar.ToString().Equals(registration));
+            .Where(booking => booking.Car.Registration.ToString().Equals(registration));
     }
 
     public IBooking? GetByRegistration(string registration)

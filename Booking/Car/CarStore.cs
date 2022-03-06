@@ -37,5 +37,11 @@ public class CarStore
     {
         _dataLayer = fakeCars;
     }
-    
+
+    public ICar? GetByRegistration(Registration.Registration registration)
+    {
+        return _dataLayer.Entities
+            .FirstOrDefault(car => car.Registration.ToString().Equals(registration.ToString()));
+
+    }
 }

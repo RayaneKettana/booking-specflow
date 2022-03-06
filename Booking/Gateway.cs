@@ -82,12 +82,12 @@ public class Gateway
         return _customer != null && _customer.isConnected();
     }
 
-    public string Book(Registration.Registration registration, DateTime from, DateTime to)
+    public string Book(Registration.Registration registration, DateTime from, DateTime to, short forecastKilometers)
     {
         if (CheckIsConnected())
         {
-            _bookingService.AddBooking(registration, _customer, from, to);
-            return "Réservation est un succès";
+            var forecastBill = _bookingService.AddBooking(registration, _customer, @from, to, forecastKilometers);
+            return "Réservation est un succès : Facture prévisionnel " + forecastBill;
         }
 
         return "Réservation impossible";
@@ -98,8 +98,8 @@ public class Gateway
     {
         if (CheckIsConnected())
         {
-            _bookingService.closeBooking(registration, actualKilometer);
-            return "Réservation cloturée";
+            var actualBill = _bookingService.CloseBooking(registration, actualKilometer);
+            return "Réservation cloturée : Facture " + actualBill;
         }
 
         return "Cloture impossible";
