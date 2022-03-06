@@ -79,36 +79,45 @@ namespace Booking.Features
         {
 #line 4
     #line hidden
-            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "color",
                         "brand",
-                        "model"});
-            table4.AddRow(new string[] {
+                        "model",
+                        "Cv",
+                        "base price",
+                        "price / km"});
+            table3.AddRow(new string[] {
                         "black",
                         "BMW",
-                        "Serie 3"});
-            table4.AddRow(new string[] {
+                        "Serie 3",
+                        "16",
+                        "60.99",
+                        "3.0"});
+            table3.AddRow(new string[] {
                         "grey",
                         "DACIA",
-                        "Duster"});
+                        "Duster",
+                        "7",
+                        "36.98",
+                        "1.3"});
 #line 5
-        testRunner.Given("the following cars exists", ((string)(null)), table4, "Given ");
+        testRunner.Given("the following cars exists", ((string)(null)), table3, "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Firstname",
                         "LastName",
                         "Birthday",
                         "DatePermitObtained",
                         "DrivingLicenceNumber",
                         "Password"});
-            table5.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "John",
                         "Smith",
                         "Dec 4, 1998",
                         "Feb 5, 2018",
                         "1234565431",
                         "password1234"});
-            table5.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Mike",
                         "Adams",
                         "Dec 4, 1995",
@@ -116,7 +125,7 @@ namespace Booking.Features
                         "1987214312",
                         "password4321"});
 #line 9
-        testRunner.And("the following customers exist", ((string)(null)), table5, "And ");
+        testRunner.And("the following customers exist", ((string)(null)), table4, "And ");
 #line hidden
 #line 13
         testRunner.And("the client initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

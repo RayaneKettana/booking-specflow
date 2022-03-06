@@ -3,9 +3,9 @@ Simple calculator for adding two numbers
 
     Background:
         Given the following cars exists
-          | color | brand | model   |
-          | black | BMW   | Serie 3 |
-          | grey  | DACIA | Duster  |
+          | color | brand | model   | Cv | base price | price / km |
+          | black | BMW   | Serie 3 | 16 | 60.99      | 3.0        |
+          | grey  | DACIA | Duster  | 7  | 36.98      | 1.3        |
         And the following customers exist
           | Firstname | LastName | Birthday    | DatePermitObtained | DrivingLicenceNumber | Password     |
           | John      | Smith    | Dec 4, 1998 | Feb 5, 2018        | 1234565431           | password1234 |

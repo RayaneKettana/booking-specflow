@@ -13,13 +13,19 @@ public class Car : ICar
     public string Color => color;
     public string Brand => brand;
     public string Model => model;
+    public short Cv { get; }
+    public double BasePrice { get; }
+    public double PerKilometerPrice { get; }
     public Registration.Registration Registration => _registration;
 
-    public Car(string color, string brand, string model)
+    public Car(string color, string brand, string model, short cv, double basePrice, double perKilometerPrice)
     {
         this.color = color;
         this.brand = brand;
         this.model = model;
+        Cv = cv;
+        BasePrice = basePrice;
+        PerKilometerPrice = perKilometerPrice;
         this._registration = (Registration.Registration) RegistrationSingleton.GetInstance().next();
     }
     

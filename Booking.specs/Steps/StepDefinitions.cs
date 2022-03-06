@@ -75,24 +75,18 @@ public sealed class StepDefinitions
     [Given(@"the following cars exists")]
     public void GivenTheFollowingCarsExists(Table table)
     {
-         _fakeCars = new List<Car.Car>();
+        _fakeCars = new List<Car.Car>();
         foreach (var row in table.Rows)
         {
-            _fakeCars.Add(new Car.Car(row[0], row[1], row[2]));
+            _fakeCars.Add(new Car.Car(row[0],
+                row[1],
+                row[2],
+                short.Parse(row[3]),
+                double.Parse(row[4]),
+                double.Parse(row[5])));
         }
         
     }
-
-    [Given(@"the following booking exists")]
-    public void GivenTheFollowingBookingExists(Table table)
-    {
-        _fakeBookings = new List<Booking.Booking>();
-        foreach (var row in table.Rows)
-        {
-            _fakeCars.Add(new Car.Car(row[0], row[1], row[2]));
-        }
-    }
-
    
     [Given(@"I am a person without an account")]
     public void GivenIAmAPersonWithoutAnAccount()
@@ -134,7 +128,7 @@ public sealed class StepDefinitions
     [Given(@"the following customers exist")]
     public void GivenTheFollowingCustomersExist(Table table)
     {
-         _fakeCustomer = new List<Customer.Customer>();
+        _fakeCustomer = new List<Customer.Customer>();
         foreach (var row in table.Rows)
         {
             _fakeCustomer.Add(new Customer.Customer(row[0],

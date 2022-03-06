@@ -6,12 +6,9 @@
           | John      | Smith    | Dec 4, 1998 | Feb 5, 2018        | 1234565431           | password1234 |
           | Mike      | Adams    | Dec 4, 1995 | Oct 5, 2014        | 1987214312           | password4321 |
         And the following cars exists
-          | color | brand | model   |
-          | black | BMW   | Serie 3 |
-          | grey  | DACIA | Duster  |
-        And the following booking exists
-          | customer | from  | to      |
-          | John    |    | Serie 3 |
+          | color | brand | model   | Cv | base price | price / km |
+          | black | BMW   | Serie 3 | 16 | 60.99      | 3.0        |
+          | grey  | DACIA | Duster  | 7  | 36.98      | 1.3        |
         And the client initialized
 
     @Booking
