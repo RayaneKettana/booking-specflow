@@ -21,6 +21,7 @@ public sealed class StepDefinitions
     public List<Customer.Customer> _fakeCustomer;
     private string _message;
     private List<Car.Car> _cars;
+    private List<Booking.Booking> _fakeBookings;
 
 
     public StepDefinitions(ScenarioContext scenarioContext)
@@ -82,47 +83,17 @@ public sealed class StepDefinitions
         
     }
 
-
-    [Given("the first number is (.*)")]
-    public void GivenTheFirstNumberIs(int number)
+    [Given(@"the following booking exists")]
+    public void GivenTheFollowingBookingExists(Table table)
     {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
+        _fakeBookings = new List<Booking.Booking>();
+        foreach (var row in table.Rows)
+        {
+            _fakeCars.Add(new Car.Car(row[0], row[1], row[2]));
+        }
     }
 
-    [Given("the second number is (.*)")]
-    public void GivenTheSecondNumberIs(int number)
-    {
-        //TODO: implement arrange (precondition) logic
-        // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata 
-        // To use the multiline text or the table argument of the scenario,
-        // additional string/Table parameters can be defined on the step definition
-        // method. 
-
-        _scenarioContext.Pending();
-    }
-
-    [When("the two numbers are added")]
-    public void WhenTheTwoNumbersAreAdded()
-    {
-        //TODO: implement act (action) logic
-
-        _scenarioContext.Pending();
-    }
-
-    [Then("the result should be (.*)")]
-    public void ThenTheResultShouldBe(int result)
-    {
-        //TODO: implement assert (verification) logic
-
-        _scenarioContext.Pending();
-    }
-
+   
     [Given(@"I am a person without an account")]
     public void GivenIAmAPersonWithoutAnAccount()
     {
@@ -222,10 +193,11 @@ public sealed class StepDefinitions
     }
 
     [When(@"I book a car")]
+    [Given(@"I book a car")]
     public void WhenIBookACar()
     {
-        var car = _getAvailableCar.FirstOrDefault();
-        _message = _gateway.Book(car.Registration, DateTime.Now, DateTime.Now.AddDays(2));
+        _car = _getAvailableCar.FirstOrDefault();
+        _message = _gateway.Book(_car.Registration, DateTime.Now, DateTime.Now.AddDays(2));
     }
 
     [Then(@"The car is booked")]
@@ -244,5 +216,29 @@ public sealed class StepDefinitions
     public void ThenTheListOfAvailableVehiclesAppears()
     {
         _cars.Should().NotBeEmpty().And.BeOfType(typeof(List<Car.Car>));
+    }
+
+    [Given(@"I booked a car")]
+    public void GivenIBookedACar()
+    {
+        ScenarioContext.StepIsPending();
+    }
+
+    [When(@"I return it")]
+    public void WhenIReturnIt()
+    {
+        _message = _gateway.CloseBooking(_car.Registration.ToString(), 130);
+    }
+
+    [Then(@"I receive a bill")]
+    public void ThenIReceiveABill()
+    {
+        _message.Should().Be("Réservation cloturée");
+    }
+
+    [Given(@"I take the car")]
+    public void GivenITakeTheCar()
+    {
+        _message = _gateway.StartBooking(_car.Registration.ToString());
     }
 }

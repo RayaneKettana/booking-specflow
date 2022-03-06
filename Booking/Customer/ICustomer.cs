@@ -1,6 +1,8 @@
+using Booking.Booking;
+
 namespace Booking.Customer;
 
-public interface ICustomer
+public interface ICustomer : IEntity
 {
     string FirstName { get; }
     string LastName { get; }

@@ -33,4 +33,18 @@ public class BookingService
     {
         _bookingStore.Add(registration, customer, from, to);
     }
+
+    public ClosedBooking closeBooking(string registration, short actualKilometer)
+    {
+        var booking = _bookingStore.GetOpenByRegistration(registration);
+        return _bookingStore.Close(booking ?? throw new InvalidOperationException("Open booking corresponding to this registration not found"), actualKilometer);
+    }
+
+    public IBooking startBooking(string registration)
+    {
+        var booking = _bookingStore.GetByRegistration(registration);
+        return _bookingStore.Open(booking ??
+                                  throw new InvalidOperationException(
+                                      "booking corresponding to this registration not found"));
+    }
 }

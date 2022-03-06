@@ -1,7 +1,11 @@
+using Booking.Booking;
+using Booking.Car;
+
 namespace Booking.Customer;
 
 public class Customer : ICustomer
 {
+    public Guid Id { get; }
     public string firstName;
     public string lastName;
     public DateOnly birthday;
@@ -32,5 +36,20 @@ public class Customer : ICustomer
     {
         return false;
     }
+    public override bool Equals(Object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        Customer customer = (Customer) obj;
+        return Id.Equals(customer.Id);
+    }
     
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id);
+    }
+
 }

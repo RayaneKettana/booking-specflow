@@ -1,10 +1,11 @@
+using Booking.Data;
 using Booking.Registration;
 
 namespace Booking.Car;
 
-public class Car
+public class Car : ICar
 {
-    //TODO create class for registration id 
+    public Guid Id { get; }
     private string color;
     private string brand;
     private string model;
@@ -21,6 +22,21 @@ public class Car
         this.model = model;
         this._registration = (Registration.Registration) RegistrationSingleton.GetInstance().next();
     }
+    
+    public override bool Equals(Object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
 
+        Car car = (Car) obj;
+        return Id.Equals(car.Id);
+    }
+    
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id);
+    }
 
 }

@@ -9,6 +9,9 @@
           | color | brand | model   |
           | black | BMW   | Serie 3 |
           | grey  | DACIA | Duster  |
+        And the following booking exists
+          | customer | from  | to      |
+          | John    |    | Serie 3 |
         And the client initialized
 
     @Booking
@@ -22,3 +25,11 @@
         Given I'm disconnected
         When ask the available cars
         Then I get an empty list
+
+    Scenario: A customer whom book a car can return it and get billed
+        Given I'm connected
+        And I insert a start and end date
+        And I book a car
+        And I take the car
+        When I return it
+        Then I receive a bill

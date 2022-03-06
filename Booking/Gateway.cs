@@ -20,7 +20,7 @@ public class Gateway
     }
     public Gateway(FakeData<Customer.Customer>? fakeCustomers = null,
         FakeData<Car.Car>? fakeCars = null,
-        FakeData<Booking.Booking>? fakeBookings = null)
+        FakeData<IBooking?>? fakeBookings = null)
     {
         _customerStore = CustomerStore.GetInstance();
         if (fakeCustomers != null) _customerStore.init(fakeCustomers);
@@ -92,5 +92,28 @@ public class Gateway
 
         return "Réservation impossible";
     }
-    
+
+
+    public string CloseBooking(string registration, short actualKilometer)
+    {
+        if (CheckIsConnected())
+        {
+            _bookingService.closeBooking(registration, actualKilometer);
+            return "Réservation cloturée";
+        }
+
+        return "Cloture impossible";
+    }
+
+    public string StartBooking(string registration)
+    {
+        if (CheckIsConnected())
+        {
+            _bookingService.startBooking(registration);
+            return "Voici les clé de votre voiture de location";
+        }
+
+        return "Départ impossible";
+        
+    }
 }
