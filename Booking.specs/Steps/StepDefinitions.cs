@@ -90,11 +90,6 @@ public sealed class StepDefinitions
         
     }
    
-    [Given(@"I am a person without an account")]
-    public void GivenIAmAPersonWithoutAnAccount()
-    {
-    }
-
     [When(@"I create an account")]
     public void WhenICreateAnAccount()
     {
@@ -106,13 +101,6 @@ public sealed class StepDefinitions
     {
         Assert.Contains("est connecté", _gateway.Me());
 
-    }
-
-    [When(@"I Login with a valid account")]
-    [Given(@"I Login with a valid account")]
-    public void WhenILoginWithAValidAccount()
-    {
-        _gateway.Login("John", "password1234");
     }
 
     [When(@"I logout")]
@@ -236,5 +224,17 @@ public sealed class StepDefinitions
     public void ThenIReceiveTheMessage(string message)
     {
         _message.Should().Be(message);
+    }
+
+    [When(@"I book a car a second car")]
+    public void WhenIBookACarASecondCar()
+    {
+        ScenarioContext.StepIsPending();
+    }
+
+    [Given(@"I'm connected with ""(.*)"" and ""(.*)""")]
+    public void GivenImConnectedWith(string userFirstname, string userPassword)
+    {
+        _gateway.Login(userFirstname, userPassword);
     }
 }

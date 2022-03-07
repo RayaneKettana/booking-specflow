@@ -17,12 +17,11 @@ Customer scenario
         Then I'm connected
 
     Scenario: The customer can login
-        When I Login with a valid account
+        Given I'm connected with "John" and "password1234"
         Then I'm connected
 
     Scenario: The logged customer can logout
-        Given I Login with a valid account
-        And I'm connected
+        Given I'm connected with "John" and "password1234"
         When I logout
         Then I'm disconnected
 

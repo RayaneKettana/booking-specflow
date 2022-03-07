@@ -171,7 +171,7 @@ namespace Booking.Features
     this.FeatureBackground();
 #line hidden
 #line 17
-        testRunner.Given("I Login with a valid account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("I\'m connected with \"John\" and \"password1234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 18
         testRunner.And("I get the list of vehicle", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -221,7 +221,7 @@ namespace Booking.Features
     this.FeatureBackground();
 #line hidden
 #line 24
-        testRunner.Given("I Login with a valid account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("I\'m connected with \"John\" and \"password1234\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 25
         testRunner.And("I get the list of vehicle", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

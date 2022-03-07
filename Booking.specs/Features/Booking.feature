@@ -15,7 +15,7 @@
 
     @Booking
     Scenario: The customer can book a car
-        Given I Login with a valid account
+        Given I'm connected with "John" and "password1234"
         And I insert a start and end date
         When I book a car
         Then I receive the message "Réservation est un succès : Facture prévisionnel au nom de John Smith pour un montant de 510.99 €"
@@ -26,7 +26,7 @@
         Then I get an empty list
 
     Scenario: A customer whom book a car can return it and get billed
-        Given I'm connected
+        Given I'm connected with "John" and "password1234"
         And I insert a start and end date
         And I book a car
         And I take the car
