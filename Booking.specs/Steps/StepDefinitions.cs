@@ -13,15 +13,15 @@ public sealed class StepDefinitions
 
     private readonly ScenarioContext _scenarioContext;
     private Gateway _gateway;
-    private Car.Car? _car;
+    private ICar? _car;
     private CarStore _carStore;
     private Registration.Registration _registration;
-    private List<Car.Car> _getCarsList;
-    private List<Car.Car> _getAvailableCar;
-    public List<Car.Car> _fakeCars;
+    private List<ICar> _getCarsList;
+    private List<ICar> _getAvailableCar;
+    public List<ICar> _fakeCars;
     public List<Customer.Customer> _fakeCustomer;
     private string _message;
-    private List<Car.Car> _cars;
+    private List<ICar> _cars;
     private List<Booking.Booking> _fakeBookings;
 
 
@@ -77,7 +77,7 @@ public sealed class StepDefinitions
     public void GivenTheFollowingCarsExists(Table table)
     {
         RegistrationSingleton.GetInstance().reset();
-        _fakeCars = new List<Car.Car>();
+        _fakeCars = new List<ICar>();
         foreach (var row in table.Rows)
         {
             _fakeCars.Add(new Car.Car(row[0],
@@ -185,7 +185,7 @@ public sealed class StepDefinitions
     [Given(@"the client initialized")]
     public void GivenTheClientInitialized()
     {
-        _gateway = new Gateway(fakeCustomers: new FakeData<Customer.Customer>(_fakeCustomer), fakeCars: new FakeData<Car.Car>(_fakeCars));
+        _gateway = new Gateway(fakeCustomers: new FakeData<Customer.Customer>(_fakeCustomer), fakeCars: new FakeData<ICar>(_fakeCars));
     }
 
     [When(@"I book a car")]
@@ -211,7 +211,7 @@ public sealed class StepDefinitions
     [Then(@"The list of available vehicles appears")]
     public void ThenTheListOfAvailableVehiclesAppears()
     {
-        _cars.Should().NotBeEmpty().And.BeOfType(typeof(List<Car.Car>));
+        _cars.Should().NotBeEmpty().And.BeOfType(typeof(List<ICar>));
     }
 
     [Given(@"I booked a car")]

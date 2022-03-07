@@ -13,9 +13,8 @@ public class Bill
 
     public override string ToString()
     {
-        return "le " + Booking.To.ToShortDateString() 
-                             + " au nom de " + Booking.Customer.FirstName + " " + Booking.Customer.LastName 
-                             + " pour un montant de " + Price() + " €";
+        return "au nom de " + Booking.Customer.FirstName + " " + Booking.Customer.LastName 
+               + " pour un montant de " + Price() + " €";
     }
 
     private double Price()

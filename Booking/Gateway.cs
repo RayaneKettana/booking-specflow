@@ -19,7 +19,7 @@ public class Gateway
         _bookingService = BookingService.GetInstance();
     }
     public Gateway(FakeData<Customer.Customer>? fakeCustomers = null,
-        FakeData<Car.Car>? fakeCars = null,
+        FakeData<ICar>? fakeCars = null,
         FakeData<IBooking?>? fakeBookings = null)
     {
         _customerStore = CustomerStore.GetInstance();
@@ -70,11 +70,11 @@ public class Gateway
         return "Déconnection impossible";
     }
     
-    public List<Car.Car> GetCarsList(DateTime from, DateTime to)
+    public List<ICar> GetCarsList(DateTime from, DateTime to)
     {
         return CheckIsConnected() 
-            ? _bookingService.getAvailableCar(from, to)
-            : new List<Car.Car>();
+            ? _bookingService.GetAvailableCar(from, to)
+            : new List<ICar>();
     }
 
     private bool CheckIsConnected()

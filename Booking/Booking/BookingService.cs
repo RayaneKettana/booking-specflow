@@ -20,7 +20,7 @@ public class BookingService
         _carStore = carStore ?? throw new ArgumentNullException(nameof(carStore));
     }
 
-    public List<Car.Car> getAvailableCar(DateTime from, DateTime to)
+    public List<ICar> GetAvailableCar(DateTime from, DateTime to)
     {
         var unavailableRegistrations = _bookingStore
             .GetByPeriod(from, to)

@@ -18,7 +18,7 @@
         Given I Login with a valid account
         And I insert a start and end date
         When I book a car
-        Then I receive the message "Réservation est un succès : Facture prévisionnel le 3/8/2022 au nom de John Smith pour un montant de 510.99 €"
+        Then I receive the message "Réservation est un succès : Facture prévisionnel au nom de John Smith pour un montant de 510.99 €"
 
     Scenario: The logged out customer cannot display cars list
         Given I'm disconnected
@@ -31,4 +31,4 @@
         And I book a car
         And I take the car
         When I return it
-        Then I receive the message "Réservation cloturée : Facture le 3/8/2022 au nom de John Smith pour un montant de 450.99 €"
+        Then I receive the message "Réservation cloturée : Facture au nom de John Smith pour un montant de 450.99 €"
