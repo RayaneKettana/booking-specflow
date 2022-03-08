@@ -235,4 +235,44 @@ public sealed class StepDefinitions
     {
         _message = _gateway.StartBooking(_car.Registration.ToString());
     }
+
+    [Given(@"I'm connected with a underage account")]
+    public void GivenImConnectedWithAUnderageAccount()
+    {
+        _gateway.Login("Rayan", "password1234");
+    }
+
+    [Then(@"I receive a message ""(.*)""")]
+    public void ThenIReceiveAMessage(string p0)
+    {
+        _message.Should().Be(p0);
+    }
+    
+
+    [Given(@"I Login with a twenty three years old account")]
+    public void GivenILoginWithATwentyThreeYearsOldAccount()
+    {
+        _gateway.Login("Swan", "password1234");
+    }
+
+    [When(@"I book a car sixteen cv")]
+    public void WhenIBookACarSixteenCv()
+    {
+        _car = _getAvailableCar.FirstOrDefault();
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2));
+
+    }
+
+    [Given(@"I Login with a twenty years old account")]
+    public void GivenILoginWithATwentyYearsOldAccount()
+    {
+        _gateway.Login("Loic", "password1234");
+    }
+
+    [When(@"I book a car height cv")]
+    public void WhenIBookACarHeightCv()
+    {
+        _car = _getAvailableCar.LastOrDefault();
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2));
+    }
 }
