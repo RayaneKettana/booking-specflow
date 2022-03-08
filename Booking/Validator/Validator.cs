@@ -5,7 +5,7 @@ namespace Booking.Validator;
 public static class Validator
 {
 
-    public static bool hasLincenceDriver(ICustomer customer)
+    private static bool hasLincenceDriver(ICustomer customer)
     {
         if (customer.DatePermitObtained == null)
         {
@@ -14,8 +14,30 @@ public static class Validator
         return true;
     }
     
-    public static int isLegalAge(ICustomer customer)
+    private static int customerOld(ICustomer customer)
     {
-        return 1;
+        var dateNow = DateOnly.FromDateTime(DateTime.Now);
+        return dateNow.Year - customer.Birthday.Year;
     }
+    
+    public static bool canBookACar(ICustomer customer, Car.Car car)
+    {
+        if (!hasLincenceDriver(customer) || customerOld(customer) < 18)
+        {
+            return false;
+        }
+
+        if (customerOld(customer) < 21 && car.Cv >= 8)
+        {
+            return false;
+        }
+        
+        if ((customerOld(customer) >= 21 && customerOld(customer) <= 25) && car.Cv >= 13)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
 }

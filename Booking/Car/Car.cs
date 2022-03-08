@@ -9,6 +9,7 @@ public class Car : ICar
     private string color;
     private string brand;
     private string model;
+    private int horsePower;
     private Registration.Registration _registration;
     public string Color => color;
     public string Brand => brand;

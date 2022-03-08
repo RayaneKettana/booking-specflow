@@ -35,26 +35,26 @@
         Given I Login with a valid account
         And I insert a start and end date
         When I book a car
-        Then I receive a message "You should be 18 years old to book a car"
+        Then I receive a message "Réservation impossible"
         
     Scenario: A customer without licence drive cannot book a car
         Given I Login with a valid account
         And I insert a start and end date
         When I book a car
-        Then I receive a message "You need a licence driver to book a car"
+        Then I receive a message "Réservation impossible"
 
         
     Scenario: A customer under 21 years old cannot book a  car more or equal than 8 horses
         Given I Login with a valid account
         And I insert a start and end date
         When I book a car
-        Then I receive a message "You should be 21 yeard old for book this car"
+        Then I receive a message "Réservation impossible"
         
     Scenario: A customer between 21 and 25 years old cannot a car more or equal than 16 horses
         Given I Login with a valid account
         And I insert a start and end date
         When I book a car
-        Then I receive a message "You should be more than 25 years for book this car"
+        Then I receive a message "Réservation impossible"
 
 
         

@@ -191,7 +191,7 @@ public sealed class StepDefinitions
     public void WhenIBookACar()
     {
         _car = _getAvailableCar.FirstOrDefault();
-        _message = _gateway.Book(_car.Registration, DateTime.Now, DateTime.Now.AddDays(2));
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2));
     }
 
     [Then(@"The car is booked")]

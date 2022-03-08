@@ -10,7 +10,7 @@ public class Customer : ICustomer
     public string lastName;
     public DateOnly birthday;
     public DateOnly? datePermitObtained;
-    public string drivingLicenceNumber;
+    public string? drivingLicenceNumber;
     public string password;
     public bool Connected { get; } = false;
     public string FirstName => firstName;

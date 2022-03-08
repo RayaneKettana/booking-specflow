@@ -2,6 +2,7 @@ using Booking.Booking;
 using Booking.Car;
 using Booking.Customer;
 using Booking.Seed;
+using Booking.Validator;
 
 namespace Booking;
 
@@ -82,12 +83,15 @@ public class Gateway
         return _customer != null && _customer.isConnected();
     }
 
-    public string Book(Registration.Registration registration, DateTime from, DateTime to)
+    public string Book(Car.Car car, DateTime from, DateTime to)
     {
-        if (CheckIsConnected())
+        if (CheckIsConnected() && Validator.Validator.canBookACar(_customer, car))
         {
-            _bookingService.AddBooking(registration, _customer, from, to);
+
+            _bookingService.AddBooking(car.Registration, _customer, from, to);
             return "Réservation est un succès";
+
+            
         }
 
         return "Réservation impossible";
