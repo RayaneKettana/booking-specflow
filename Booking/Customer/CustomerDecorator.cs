@@ -7,7 +7,7 @@ public class CustomerDecorator : ICustomer
 
     public string LastName => _customer.LastName;
     public DateOnly Birthday => _customer.Birthday;
-    public DateOnly DatePermitObtained => _customer.DatePermitObtained;
+    public DateOnly? DatePermitObtained => _customer.DatePermitObtained;
     public string DrivingLicenceNumber => _customer.DrivingLicenceNumber;
     public string Password => _customer.Password;
     
