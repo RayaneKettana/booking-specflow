@@ -8,6 +8,7 @@ Feature: Booking
           | Rayan     | Kley     | Dec 4, 2010 | Oct 5, 2014        | 1987214312           | password4321 |
           | Loic      | gluch    | Jan 4, 2002 |       Oct 5, 2014  |         null         | password4321 |
           | Swan      | glowa    | Jan 4, 1998 |       Oct 5, 2014  |         1987214312   | password4321 |
+          | gyzo      | tchuk    | Jan 4, 1998 |                    |                      | password4321 |
         And the following cars exists
           | color | brand | model   | Cv | base price | price / km |
           | black | BMW   | Serie 3 | 16 | 60.99      | 3.0        |
@@ -36,6 +37,12 @@ Feature: Booking
         
     Scenario: The underage customer cannot book a car
         Given I'm connected with a underage account
+        And I insert a start and end date
+        When I book a car
+        Then I receive a message "Réservation impossible"
+        
+    Scenario: A customer without drive licence cannot book a car
+        Given I'm connected with a not licence user account
         And I insert a start and end date
         When I book a car
         Then I receive a message "Réservation impossible"

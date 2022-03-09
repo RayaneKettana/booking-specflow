@@ -93,7 +93,6 @@ public class Gateway
         return "Réservation impossible";
     }
 
-
     public string CloseBooking(string registration, short actualKilometer)
     {
         if (CheckIsConnected())

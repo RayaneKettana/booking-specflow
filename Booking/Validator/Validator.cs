@@ -14,25 +14,25 @@ public static class Validator
         return true;
     }
     
-    private static int customerOld(ICustomer customer)
+    private static int getAge(DateOnly birthday)
     {
         var dateNow = DateOnly.FromDateTime(DateTime.Now);
-        return dateNow.Year - customer.Birthday.Year;
+        return dateNow.Year - birthday.Year;
     }
     
     public static bool canBookACar(ICustomer customer, Car.Car car)
     {
-        if (!hasLincenceDriver(customer) || customerOld(customer) < 18)
+        if (!hasLincenceDriver(customer) || getAge(customer.Birthday) < 18)
         {
             return false;
         }
 
-        if (customerOld(customer) < 21 && car.Cv >= 8)
+        if (getAge(customer.Birthday) < 21 && car.Cv >= 8)
         {
             return false;
         }
         
-        if ((customerOld(customer) >= 21 && customerOld(customer) <= 25) && car.Cv >= 13)
+        if ((getAge(customer.Birthday) >= 21 && getAge(customer.Birthday) <= 25) && car.Cv >= 13)
         {
             return false;
         }

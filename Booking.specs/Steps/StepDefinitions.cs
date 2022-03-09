@@ -134,7 +134,7 @@ public sealed class StepDefinitions
             _fakeCustomer.Add(new Customer.Customer(row[0],
                 row[1],
                 DateOnly.Parse(row[2]),
-                DateOnly.Parse(row[3]), 
+                row[3] == "" ? null: DateOnly.Parse(row[3]), 
                 row[4],
                 row[5]
             ));
@@ -274,5 +274,11 @@ public sealed class StepDefinitions
     {
         _car = _getAvailableCar.LastOrDefault();
         _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2));
+    }
+
+    [Given(@"I'm connected with a not licence user account")]
+    public void GivenImConnectedWithANotLicenceUserAccount()
+    {
+        _gateway.Login("gyzo", "password1234");
     }
 }
