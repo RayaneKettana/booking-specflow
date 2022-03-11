@@ -10,7 +10,7 @@ public interface IBooking : IEntity
     ICustomer Customer { get; }
     DateTime From { get; }
     DateTime To { get; }
-    Boolean isOpen { get; set; }
     Bill ForecastBill { get; }
     short ForecastKilometers { get; }
+    Status Status { get; set; }
 }

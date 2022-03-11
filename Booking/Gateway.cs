@@ -19,8 +19,8 @@ public class Gateway
         _bookingService = BookingService.GetInstance();
     }
     public Gateway(FakeData<Customer.Customer>? fakeCustomers = null,
-        FakeData<ICar>? fakeCars = null,
-        FakeData<IBooking?>? fakeBookings = null)
+        FakeData<ICar> fakeCars = null,
+        FakeData<IBooking> fakeBookings = null)
     {
         _customerStore = CustomerStore.GetInstance();
         if (fakeCustomers != null) _customerStore.init(fakeCustomers);
@@ -86,8 +86,15 @@ public class Gateway
     {
         if (CheckIsConnected() && Validator.Validator.canBookACar(_customer, car))
         {
-            var forecastBill = _bookingService.AddBooking(car.Registration, _customer, @from, to, forecastKilometers);
-            return "Réservation est un succès : Facture prévisionnel " + forecastBill;
+            try
+            {
+                var forecastBill = _bookingService.AddBooking(car.Registration, _customer, @from, to, forecastKilometers);
+                return "Réservation est un succès : Facture prévisionnel " + forecastBill;
+            }
+            catch (Exception e)
+            {
+                return "Réservation impossible : " + e.Message;
+            }
         }
 
         return "Réservation impossible";

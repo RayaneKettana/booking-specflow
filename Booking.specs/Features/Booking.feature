@@ -43,7 +43,7 @@
         And I insert a start and end date
         And I book a "Prius"
         When I book a "Twingo"
-        Then I receive the message "Réservation impossible : une réservation est déjà en cours pour cette période"
+        Then I receive the message "Réservation impossible : Customer has already booked a car for the period"
 
     Scenario: The underage customer cannot book a car
         Given I'm connected with a underage account

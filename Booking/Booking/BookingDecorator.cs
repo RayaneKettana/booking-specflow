@@ -12,7 +12,7 @@ public class BookingDecorator : IBooking
     public DateTime To => _booking.To;
     public Bill ForecastBill => _booking.ForecastBill;
     public short ForecastKilometers => _booking.ForecastKilometers;
-    public Boolean isOpen { get; set; }
+    public Status Status { get; set; }
     private IBooking _booking;
 
     public BookingDecorator(IBooking booking)

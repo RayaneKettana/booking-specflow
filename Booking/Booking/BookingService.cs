@@ -34,8 +34,18 @@ public class BookingService
         var byRegistration = _carStore.GetByRegistration(registration);
         var car = byRegistration
                   ?? throw new InvalidOperationException("Car corresponding to this registration not found : " + registration);
+        if (HasAlreadyBookForThePeriod(customer,from,to))
+        {
+            throw new InvalidOperationException("Customer has already booked a car for the period");
+        }
         return _bookingStore.Add(car, customer, from, to, forecastKilometer)
             ?? throw new InvalidOperationException("Booking is not create" + registration);
+    }
+
+    private bool HasAlreadyBookForThePeriod(AuthenticatedCustomer customer, DateTime @from, DateTime to)
+    {
+        var byCustomerByPeriod = _bookingStore.GetByCustomerByPeriod(customer, @from, to);
+        return byCustomerByPeriod != null;
     }
 
     public Bill CloseBooking(string registration, short actualKilometer)
@@ -53,4 +63,5 @@ public class BookingService
                                   throw new InvalidOperationException(
                                       "booking corresponding to this registration not found"));
     }
+    
 }

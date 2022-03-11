@@ -10,9 +10,9 @@ public class Booking : IBooking
     public ICustomer Customer { get; private set; }
     public DateTime From { get; private set; }
     public DateTime To { get; private set; }
-    public Boolean isOpen { get; set; }
     public Bill ForecastBill { get; }
     public short ForecastKilometers { get; }
+    public Status Status { get; set; }
 
     public Booking(ICar car, ICustomer customer, DateTime @from, DateTime to, short forecastKilometers)
     {
@@ -23,6 +23,7 @@ public class Booking : IBooking
         To = to;
         ForecastKilometers = forecastKilometers;
         ForecastBill = new Bill(this, forecastKilometers);
+        Status = Status.Pending;
     }
 
     public override bool Equals(Object obj)

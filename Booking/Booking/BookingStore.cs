@@ -35,7 +35,6 @@ public class BookingStore
     public Bill? Add(ICar car, ICustomer customer, DateTime from, DateTime to, short forecastKilometer)
     {
         return _dataLayer.Add(new Booking(car, customer, from, to, forecastKilometer)).ForecastBill;
-        // TO DO Check the booking doesn't exist  
     }
 
     public ClosedBooking Close(IBooking bookingToClose, short actualKilometers)
@@ -48,7 +47,7 @@ public class BookingStore
     public IBooking? GetOpenByRegistration(string registration)
     {
         return EntitiesWhereRegistration(registration)
-            .FirstOrDefault(booking => booking.isOpen);
+            .FirstOrDefault(booking => booking.Status == Status.Open);
     }
 
     private IEnumerable<IBooking> EntitiesWhereRegistration(string registration)
@@ -65,7 +64,22 @@ public class BookingStore
 
     public IBooking Open(IBooking booking)
     {
-        booking.isOpen = true;
+        booking.Status = Status.Open;
         return _dataLayer.Update(booking);
     }
+
+    public IBooking? GetPendingOrOpen()
+    {
+        return _dataLayer.Entities
+            .Where(booking => booking.Status == Status.Open )
+            .FirstOrDefault(booking => booking.Status == Status.Pending);
+    }
+
+    public IBooking? GetByCustomerByPeriod(AuthenticatedCustomer customer, DateTime @from, DateTime to)
+    {
+        return _dataLayer.Entities
+            .Where(booking => booking.Customer.Equals(customer))
+            .FirstOrDefault(booking => from <= booking.From || to >= booking.To);
+    }
+
 }

@@ -1,3 +1,4 @@
+using Booking.Booking;
 using Booking.Car;
 using Booking.Registration;
 using Booking.Seed;
@@ -174,7 +175,7 @@ public sealed class StepDefinitions
     [Given(@"the client initialized")]
     public void GivenTheClientInitialized()
     {
-        _gateway = new Gateway(fakeCustomers: new FakeData<Customer.Customer>(_fakeCustomer), fakeCars: new FakeData<ICar>(_fakeCars));
+        _gateway = new Gateway(fakeCustomers: new FakeData<Customer.Customer>(_fakeCustomer), fakeCars: new FakeData<ICar>(_fakeCars), fakeBookings: new FakeData<IBooking>(new List<IBooking>()));
     }
 
     [When(@"I book "".*""")]
