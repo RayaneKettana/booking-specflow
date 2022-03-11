@@ -82,11 +82,11 @@ public class Gateway
         return _customer != null && _customer.isConnected();
     }
 
-    public string Book(Registration.Registration registration, DateTime from, DateTime to, short forecastKilometers)
+    public string Book(ICar car, DateTime from, DateTime to, short forecastKilometers)
     {
-        if (CheckIsConnected())
+        if (CheckIsConnected() && Validator.Validator.canBookACar(_customer, car))
         {
-            var forecastBill = _bookingService.AddBooking(registration, _customer, @from, to, forecastKilometers);
+            var forecastBill = _bookingService.AddBooking(car.Registration, _customer, @from, to, forecastKilometers);
             return "Réservation est un succès : Facture prévisionnel " + forecastBill;
         }
 

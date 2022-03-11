@@ -2,6 +2,7 @@ using Booking.Car;
 using Booking.Registration;
 using Booking.Seed;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Xunit;
 
 namespace Booking.Steps;
@@ -13,7 +14,7 @@ public sealed class StepDefinitions
 
     private readonly ScenarioContext _scenarioContext;
     private Gateway _gateway;
-    private ICar? _car;
+    private ICar _car;
     private CarStore _carStore;
     private Registration.Registration _registration;
     private List<ICar> _getCarsList;
@@ -124,7 +125,7 @@ public sealed class StepDefinitions
             _fakeCustomer.Add(new Customer.Customer(row[0],
                 row[1],
                 DateOnly.Parse(row[2]),
-                DateOnly.Parse(row[3]), 
+                row[3] == "" ? null: DateOnly.Parse(row[3]), 
                 row[4],
                 row[5]
             ));
@@ -176,12 +177,13 @@ public sealed class StepDefinitions
         _gateway = new Gateway(fakeCustomers: new FakeData<Customer.Customer>(_fakeCustomer), fakeCars: new FakeData<ICar>(_fakeCars));
     }
 
-    [When(@"I book a car")]
-    [Given(@"I book a car")]
-    public void WhenIBookACar()
+    [When(@"I book "".*""")]
+    [Given(@"I book "".*""")]
+    public void WhenIBookACar(string model)
     {
-        _car = _getAvailableCar.FirstOrDefault();
-        _message = _gateway.Book(_car.Registration, DateTime.Now, DateTime.Now.AddDays(2), 150);
+        _car = _getAvailableCar.FirstOrDefault() 
+               ?? throw new AssertionFailedException("No corresponding car");
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2), 150);
     }
 
     [Then(@"The car is booked")]
@@ -236,5 +238,52 @@ public sealed class StepDefinitions
     public void GivenImConnectedWith(string userFirstname, string userPassword)
     {
         _gateway.Login(userFirstname, userPassword);
+    }
+
+    [Given(@"I'm connected with a underage account")]
+    public void GivenImConnectedWithAUnderageAccount()
+    {
+        _gateway.Login("Rayan", "password1234");
+    }
+
+    [Given(@"I Login with a twenty three years old account")]
+    public void GivenILoginWithATwentyThreeYearsOldAccount()
+    {
+        _gateway.Login("Swan", "password1234");
+    }
+
+    [When(@"I book a car sixteen cv")]
+    public void WhenIBookACarSixteenCv()
+    {
+        _car = _getAvailableCar.FirstOrDefault();
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2), 150);
+
+    }
+
+    [Given(@"I Login with a twenty years old account")]
+    public void GivenILoginWithATwentyYearsOldAccount()
+    {
+        _gateway.Login("Loic", "password1234");
+    }
+
+    [When(@"I book a car height cv")]
+    public void WhenIBookACarHeightCv()
+    {
+        _car = _getAvailableCar.LastOrDefault();
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2), 123);
+    }
+
+    [Given(@"I'm connected with a not licence user account")]
+    public void GivenImConnectedWithANotLicenceUserAccount()
+    {
+        _gateway.Login("gyzo", "password1234");
+    }
+
+    [When(@"I book a ""(.*)""")]
+    [Given(@"I book a ""(.*)""")]
+    public void WhenIBookA(string model)
+    {
+        _car = _getAvailableCar.FirstOrDefault(car => car.Model.Equals(model));
+        _message = _gateway.Book(_car, DateTime.Now, DateTime.Now.AddDays(2), 150);
     }
 }
