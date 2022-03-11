@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking", "Booking\Booking.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booking.Tests", "Booking.Tests\Booking.Tests.csproj", "{EC44446D-396C-4A23-A818-C18135CC43E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "api\api.csproj", "{7E19AD20-BCCF-4866-83A4-E41F1BFFC1AF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +25,5 @@ Global
 		{EC44446D-396C-4A23-A818-C18135CC43E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC44446D-396C-4A23-A818-C18135CC43E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC44446D-396C-4A23-A818-C18135CC43E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E19AD20-BCCF-4866-83A4-E41F1BFFC1AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E19AD20-BCCF-4866-83A4-E41F1BFFC1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E19AD20-BCCF-4866-83A4-E41F1BFFC1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E19AD20-BCCF-4866-83A4-E41F1BFFC1AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
